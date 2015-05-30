@@ -92,7 +92,7 @@ class Lexer:
     t_ignore = " \t"
 
     def t_STRING(self, t):
-        r'"[\w \t]+"'
+        r'\"([^\\\n]|(\\.))*?\"'
         try:
             t.value = str(t.value)
         except ValueError:
@@ -116,18 +116,13 @@ class Lexer:
         r'\n+'
         t.lexer.lineno += t.value.count("\n")
 
+    def t_comment(t):
+        r'(/\*(.|\n)*?\*/)|//(.)'
+        t.lexer.lineno += t.value.count('\n')
+
     def t_error(self, t):
         print "Illegal character '%s'" % t.value[0]
         t.lexer.skip(1)
-
-    def run(self):
-        while 1:
-            try:
-                s = raw_input('calc > ')
-            except EOFError:
-                break
-            if not s: continue
-            yacc.parse(s)
 
     def printError(msg,token):
         print msg, " ", token.value
