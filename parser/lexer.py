@@ -1,7 +1,7 @@
 import ply.lex as lex
 import ply.yacc as yacc
 
-class Parser:
+class Lexer:
 
     tokens = (
             #Identifier
@@ -132,18 +132,3 @@ class Parser:
     def printError(msg,token):
         print msg, " ", token.value
         sys.exit(1)
- 
-    def __init__(self, **keywargs):
-        self.debug = keywargs.get('debug',0)
-        self.names = { }
-        try:
-            modname = os.path.split(os.path.splitext(__file__)[0])[1] + "_" + self.__class__.__name__
-        except:
-            modname = "parser"+"_"+ self.__class__.__name__
-        self.debugfile = modname + ".dbg"
-        self.tabmodule = modname + "_" + "parsetab"
-
-        lex.lex(module=self,debug=self.debug)
-        yacc.yacc(module=self,
-            debug=self.debug,
-            debugfile=self.debugfile,
