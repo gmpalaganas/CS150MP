@@ -29,6 +29,8 @@ class Parser:
         'laging' : 'CONST',
     }
 
+    tokens = tokens + list(reserved.values())
+
     precedence = (
             ('left', '+', '-'),
             ('left', '*', '/'),
