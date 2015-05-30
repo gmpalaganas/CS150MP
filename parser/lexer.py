@@ -7,7 +7,7 @@ class Lexer:
 
     tokens = (
             #Identifier
-            'IDENT',
+            'ID',
 
             #Constants / Literals
             'INT', 'FLOAT', 'BOOL'
@@ -18,7 +18,7 @@ class Lexer:
             'AND', 'OR', 'NOT'
             'LE', 'GE', 'GT', 'LT', 'EQ', 'NE',
             'EQUALS', 
-            'MULTEQUALS', 'DIVEQUALS', 'PLUSEQUALS', 'MINUSEQUALS', 'MODEQUALS',
+            'TIMESEQUALS', 'DIVEQUALS', 'PLUSEQUALS', 'MINUSEQUALS', 'MODEQUALS',
             'OREQUALS', 'ANDEQUALS',
             
             #Increment/Decrement
@@ -52,11 +52,11 @@ class Lexer:
 
     precedence = ()
     
-    t_INDENT = r'(numero|tuldok|titik)_[a-zA-z_][a-zA-Z0-9_]*' #Booleans? Strings?
+    t_ID = r'(numero|tuldok|titik)_[a-zA-z_][a-zA-Z0-9_]*' #Booleans? Strings?
 
     t_PLUS = r'\+'
     t_MINUS = r'-'
-    t_MULT = r'\*'
+    t_TIMES = r'\*'
     t_DIVIDE = r'/'
     t_MOD = r'%'
     t_AND = r'&&'
@@ -71,7 +71,7 @@ class Lexer:
     t_EQUALS = r'='
     t_PLUSEQUALS = r'\+='
     t_MINUSEQUALS = r'-='
-    t_MULTEQUALS = r'\*='
+    t_TIMESEQUALS = r'\*='
     t_DIVEQUALS = r'/='
     t_MODEQUALS = r'%='
     t_ANDEQUALS = r'&='
