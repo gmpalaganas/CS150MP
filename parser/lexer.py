@@ -38,6 +38,8 @@ tokens = [
 	'GE',
 	'LT',
 	'LE',
+        #condition op
+        'COND_OP'
 	#assign ops
 	'ASSIGN_OP',
         'ADD_ASSIGN',
@@ -48,6 +50,7 @@ tokens = [
 	#logial ops
 	'AND',
 	'OR',
+        'NOT',
 	#boundaries
 	'LPAREN',
 	'RPAREN',
@@ -66,6 +69,8 @@ tokens = [
 	'CHAR_LIT',
 	'STR_LIT',	
 	#other
+        'PLUSPLUS',
+        'MINMIN',
 	'SEMI',
 	'COMMA',
         'COLON',
@@ -84,7 +89,9 @@ t_NEQ			= r'!='
 t_GT			= r'>'
 t_GE 			= r'>='
 t_LT 			= r'<'
-t_LE 			= r'<='
+t_LE 		        = r'<='
+
+t_COND_OP               = r'\?'
 
 t_ASSIGN_OP		= r'='
 t_ADD_ASSIGN            = r'\+='
@@ -95,6 +102,7 @@ t_MOD_ASSIGN            = r'%='
 
 t_AND			= r'&&'
 t_OR   			= r'\|\|'
+t_NOT                   = r'!'
 
 t_LPAREN  		= r'\('
 t_RPAREN  		= r'\)'
@@ -103,6 +111,8 @@ t_RBRACE 		= r'\}'
 t_LBRACKET		= r'\['
 t_RBRACKET		= r'\]'	
 
+t_PLUSPLUS              = r'\+\+'
+t_MINMIN                = r'--'
 t_SEMI			= r';'
 t_COMMA			= r','
 t_COLON                 = r':'
