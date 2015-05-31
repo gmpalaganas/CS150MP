@@ -1,8 +1,8 @@
-from parser.lexer import Lexer
+from parser.lexer import runLexerOnFile
+import sys
 
 def main():
-    print "Not Implemented"
-
+    runLexerOnFile(sys.argv[1])
 
 if __name__ == "__main__":
     main()
