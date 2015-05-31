@@ -59,6 +59,10 @@ tokens = [
 	'MULTILINE_COMMENT',
 	#main
 	'MAIN',
+	#unary_ops
+	'INC',
+	'DEC',
+
 ] + list(reserved.values())
 
 t_ADD_OP    	= r" \+ "
@@ -89,6 +93,8 @@ t_RBRACKET		= r'\]'
 t_SEMI			= r';'
 t_COMMA			= r','
 
+t_INC 			= r'\+\+'
+t_DEC			= r'--'
 
 # Error handling rule
 def t_error(t):
@@ -184,6 +190,8 @@ lexer = lex.lex()
 data = '''
 -1
 -90.90 + -1
+bilang_a++
+-90.90+90--
 '''
 
 # Give the lexer some input
