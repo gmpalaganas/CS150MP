@@ -14,6 +14,7 @@ reserved = {
 	'tuloy'			:	'CONTINUE',
 	'kung'			:	'IF',
 	'ediKung'		:	'ELSE_IF',
+        'iba'                   :       'ELSE'
 	'palit'			:	'SWITCH',
 	'kaso'			:	'CASE',
         'walangKaso'            :	'DEFAULT',
@@ -37,8 +38,13 @@ tokens = [
 	'GE',
 	'LT',
 	'LE',
-	#assign op
+	#assign ops
 	'ASSIGN_OP',
+        'ADD_ASSIGN',
+        'MIN_ASSIGN',
+        'MUL_ASSIGN',
+        'DIV_ASSIGN',
+        'MOD_ASSIGN',
 	#logial ops
 	'AND',
 	'OR',
@@ -62,6 +68,7 @@ tokens = [
 	#other
 	'SEMI',
 	'COMMA',
+        'COLON',
 	'LINE_COMMENT',
 	'MULTILINE_COMMENT'
 ] + list(reserved.values())
@@ -80,6 +87,11 @@ t_LT 			= r'<'
 t_LE 			= r'<='
 
 t_ASSIGN_OP		= r'='
+t_ADD_ASSIGN            = r'\+='
+t_MIN_ASSIGN            = r'-='
+t_MUL_ASSIGN            = r'\*='
+t_DIV_ASSIGN            = r'/='
+t_MOD_ASSIGN            = r'%='
 
 t_AND			= r'&&'
 t_OR   			= r'\|\|'
@@ -93,6 +105,7 @@ t_RBRACKET		= r'\]'
 
 t_SEMI			= r';'
 t_COMMA			= r','
+t_COLON                 = r':'
 
 
 # Error handling rule
