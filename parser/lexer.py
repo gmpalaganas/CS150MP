@@ -1,5 +1,5 @@
 import sys
-sys.path.insert(0."../..")
+sys.path.insert(0,"../..")
 
 import ply.lex as lex
 
@@ -48,7 +48,7 @@ class Lexer:
         'laging' : 'CONST',
     }
 
-    tokens = tokens + list(reserved.values())
+    tokens = tokens + tuple(reserved.values())
 
     precedence = ()
     
@@ -143,8 +143,8 @@ class Lexer:
         self.lexer.input(data)
         while True:
             tok = self.lexer.token()
-                if not tok:
-                    break
+            if not tok:
+                break
             print(tok)
 	
 #to test

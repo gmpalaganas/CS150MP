@@ -1,4 +1,4 @@
-from parser import Lexer
+from parser.lexer import Lexer
 
 def main():
     print "Not Implemented"
