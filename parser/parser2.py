@@ -3,6 +3,114 @@ from lexer import tokens
 
 def p_statements(p):
 	'''
+	statements 			: cond_statements
+						| loops
+						| fxn
+	'''
+def p_cond_statements(p):
+	'''
+	cond_statements 	: if
+						| else_if
+						| else
+						| switch
+	'''
+	print "conditionals"
+	
+def p_switch(p):
+	'''
+	switch 			: SWITCH LPAREN INT_ID RPAREN LBRACE
+	'''	
+
+def p_if(p):
+	'''
+	if 				: IF LPAREN logical_expr RPAREN LBRACE		
+	'''
+
+def p_else(p):
+	'''
+	else 			: ELSE LBRACE
+	'''
+
+def p_elseif(p):
+	'''
+	else_if			: ELSE_IF LPAREN logical_expr RPAREN LBRACE
+	'''
+
+def p_logical_expr(p):
+	'''
+	logical_expr 	: logical_expr AND boolean_expr
+					| logical_expr OR boolean_expr
+					| LPAREN logical_expr RPAREN
+					| boolean_expr 
+	'''
+	print "logical"
+
+def p_boolean_expr(p):
+	'''
+	boolean_expr 	: val boolean_ops val
+					| LPAREN boolean_expr RPAREN
+	boolean_ops		: EQ 
+					| NEQ 
+					| GT 
+					| GE 
+					| LT 
+					| LE
+	val				: id
+					| constants
+	'''
+
+def p_loops(p):
+	'''
+	loops 			: for
+					| do 
+					| do_while
+					| while 
+	'''
+	print "loops"
+def p_forLoop(p):
+	'''
+	for 				: FOR LPAREN assign_statement_a SEMI logical_expr SEMI assign_statement_a RPAREN LBRACE
+	'''
+
+def p_do(p):
+	'''
+	do 					: DO LBRACE
+	'''
+
+def p_dowhileLoop(p):
+	'''
+	do_while 			: WHILE LPAREN logical_expr RPAREN SEMI
+	'''
+
+def p_whileLoop(p):
+	'''
+	while 			: WHILE LPAREN logical_expr RPAREN LBRACE
+	'''
+
+def p_logical_expr(p):
+	'''
+	logical_expr 	: logical_expr AND boolean_expr
+					| logical_expr OR boolean_expr
+					| LPAREN logical_expr RPAREN
+					| boolean_expr 
+	'''
+	print "logical"
+
+def p_boolean_expr(p):
+	'''
+	boolean_expr 	: val boolean_ops val
+					| LPAREN boolean_expr RPAREN
+	boolean_ops		: EQ 
+					| NEQ 
+					| GT 
+					| GE 
+					| LT 
+					| LE
+	val				: id
+					| constants
+	'''
+def p_fxnVarStatements(p):
+	'''
 	fxn 			: fxn_prot
 					| fxn_dec
 					| fxn_call	
@@ -30,8 +138,7 @@ def p_fxn_dec(p):
 
 def p_fxn_call(p):
 	'''
-	fxn_call 		: id LPAREN fxn_call_args RPAREN SEMI
-					| id LPAREN void RPAREN SEMI
+	fxn_call 		: fxn_call_a SEMI
 	'''
 	print "fxn call"
 	p[0] = 'fxn call'
@@ -59,19 +166,24 @@ def p_main_fxn(p):
 	print "start main" 
 	p[0] = "yahoo"
 
-
 def p_assign_statement(p):
 	'''
-	assign_statement 	: INT_ID ASSIGN_OP additive_exp SEMI
-						| FLOAT_LIT ASSIGN_OP additive_exp SEMI
-						| INT_ID INC SEMI
-						| INT_ID DEC SEMI
-						| FLOAT_ID INC SEMI
-						| FLOAT_ID DEC SEMI
-						| INT_ID ASSIGN_OP LBRACE int_args RBRACE SEMI
-						| FLOAT_ID ASSIGN_OP LBRACE num_args RBRACE SEMI  
-						| INT_ID LBRACKET INT_LIT RBRACKET ASSIGN_OP additive_exp SEMI
-						| FLOAT_ID LBRACKET	INT_LIT RBRACKET ASSIGN_OP additive_exp SEMI					
+	assign_statement 	: assign_statement_a SEMI
+	'''
+def p_assign_statement_a(p):
+	'''
+	assign_statement_a 	: INT_ID ASSIGN_OP additive_exp 
+						| FLOAT_LIT ASSIGN_OP additive_exp 
+						| INT_ID INC 
+						| INT_ID DEC 
+						| FLOAT_ID INC 
+						| FLOAT_ID DEC 
+						| INT_ID ASSIGN_OP LBRACE int_args RBRACE 
+						| FLOAT_ID ASSIGN_OP LBRACE num_args RBRACE   
+						| INT_ID LBRACKET INT_LIT RBRACKET ASSIGN_OP additive_exp 
+						| FLOAT_ID LBRACKET	INT_LIT RBRACKET ASSIGN_OP additive_exp 	
+						| id ASSIGN_OP SCAN LPAREN RPAREN SEMI
+
 	'''
 	print "assign"
 
