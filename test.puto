@@ -1,0 +1,17 @@
+~
+
+ Multiline Comment
+
+~
+
+#Single Line Comment
+
+bilang_a = 0;
+5 + bilang_a * (3 + 5);
+kung ( bilang_a < 3 && bilang_a > 1 ){
+    
+    salita_s = "Hello World";
+    letra_c[];
+    letra_x = 'c';
+
+}
