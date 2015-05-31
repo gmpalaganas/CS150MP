@@ -52,8 +52,6 @@ class Lexer:
 
     precedence = ()
     
-    t_ID = r'(numero|tuldok|titik)_[a-zA-z_][a-zA-Z0-9_]*' #Booleans? Strings?
-
     t_PLUS = r'\+'
     t_MINUS = r'-'
     t_TIMES = r'\*'
@@ -93,6 +91,12 @@ class Lexer:
     t_BOOL = r'true|false'
     t_ignore = " \t"
 
+    #handle reserved words
+    def t_ID(self, t):
+        r'(numero|tuldok|titik)_[a-zA-z_][a-zA-Z0-9_]*'
+        t.type = reserved.get(t.value, 'ID')
+        return t
+		
     def t_STRING(self, t):
         r'\"([^\\\n]|(\\.))*?\"'
         try:
@@ -129,3 +133,21 @@ class Lexer:
     def printError(msg,token):
         print msg, " ", token.value
         sys.exit(1)
+
+    #build the lexer
+    def build(self, **kwargs):
+        self.lexer = lex.lex(module = self, **kwargs)
+    
+    #test the lexer
+    def test(self, data):
+        self.lexer.input(data)
+        while True:
+            tok = self.lexer.token()
+                if not tok:
+                    break
+            print(tok)
+	
+#to test
+'''ex = Lexer()
+ex.build()
+ex.test("4 + 6")'''
