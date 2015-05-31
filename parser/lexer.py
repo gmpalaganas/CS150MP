@@ -1,23 +1,15 @@
 import ply.lex as lex
 
-'''
-A note on t:
-    What is t? t is a 4 tuple ( type, value, line_no, col_no )
-    each can be accessed using t.type(), t.value(), t.lineno(), t.lexpos() respectively
-'''
-
 reserved = {
-	'bilang_puno'           :	'MAIN',
 	'wala'			:	'NULL',
 	'balik'			:	'RETURN',
 	'putol'			:	'BREAK',
 	'tuloy'			:	'CONTINUE',
 	'kung'			:	'IF',
 	'ediKung'		:	'ELSE_IF',
-        'iba'                   :       'ELSE'
 	'palit'			:	'SWITCH',
 	'kaso'			:	'CASE',
-        'walangKaso'            :	'DEFAULT',
+	'walangKaso'	:	'DEFAULT',
 	'tuwing'		:	'FOR',
 	'gawin'			:	'DO',
 	'habang'		:	'WHILE',
@@ -38,19 +30,11 @@ tokens = [
 	'GE',
 	'LT',
 	'LE',
-        #condition op
-        'COND_OP'
-	#assign ops
+	#assign op
 	'ASSIGN_OP',
-        'ADD_ASSIGN',
-        'MIN_ASSIGN',
-        'MUL_ASSIGN',
-        'DIV_ASSIGN',
-        'MOD_ASSIGN',
 	#logial ops
 	'AND',
 	'OR',
-        'NOT',
 	#boundaries
 	'LPAREN',
 	'RPAREN',
@@ -69,18 +53,17 @@ tokens = [
 	'CHAR_LIT',
 	'STR_LIT',	
 	#other
-        'PLUSPLUS',
-        'MINMIN',
 	'SEMI',
 	'COMMA',
-        'COLON',
 	'LINE_COMMENT',
-	'MULTILINE_COMMENT'
+	'MULTILINE_COMMENT',
+	#main
+	'MAIN',
 ] + list(reserved.values())
 
-t_ADD_OP                = r" \+ "
+t_ADD_OP    	= r" \+ "
 t_SUB_OP   		= r'-'
-t_MULT_OP               = r'\*'
+t_MULT_OP   	= r'\*'
 t_DIV_OP  		= r'/'
 t_MOD_OP  		= r'%'
 
@@ -89,20 +72,12 @@ t_NEQ			= r'!='
 t_GT			= r'>'
 t_GE 			= r'>='
 t_LT 			= r'<'
-t_LE 		        = r'<='
-
-t_COND_OP               = r'\?'
+t_LE 			= r'<='
 
 t_ASSIGN_OP		= r'='
-t_ADD_ASSIGN            = r'\+='
-t_MIN_ASSIGN            = r'-='
-t_MUL_ASSIGN            = r'\*='
-t_DIV_ASSIGN            = r'/='
-t_MOD_ASSIGN            = r'%='
 
 t_AND			= r'&&'
 t_OR   			= r'\|\|'
-t_NOT                   = r'!'
 
 t_LPAREN  		= r'\('
 t_RPAREN  		= r'\)'
@@ -111,70 +86,80 @@ t_RBRACE 		= r'\}'
 t_LBRACKET		= r'\['
 t_RBRACKET		= r'\]'	
 
-t_PLUSPLUS              = r'\+\+'
-t_MINMIN                = r'--'
 t_SEMI			= r';'
 t_COMMA			= r','
-t_COLON                 = r':'
 
 
 # Error handling rule
 def t_error(t):
-    print("Illegal character '%s' at line %s column %s" % (t.value[0], t.lineno, t.lexpos))
-    t.lexer.skip(1) 
-        
+	print("Illegal character '%s' at line %s column %s" % (t.value[0], t.lineno, t.lexpos))
+	t.lexer.skip(1)
 
-def t_INT_ID(t):
-    r'bilang_[a-zA-Z][a-zA-Z0-9]*'
-    t.value = str(t.value)    
-    return t
+def t_MAIN(t):
+	r'bilang_puno'
+	t.value = str(t.value)   
+	return t	
+
+def t_INT_ID(t):	
+	r'bilang_[a-zA-Z][a-zA-Z0-9]*'
+	t.value = str(t.value)   
+	return t
 
 def t_FLOAT_ID(t):
-    r'tuldok_[a-zA-Z][a-zA-Z0-9]*'
-    t.value = str(t.value)    
-    return t
+	r'tuldok_[a-zA-Z][a-zA-Z0-9]*'
+	t.value = str(t.value)    
+	return t
 
 def t_CHAR_ID(t):
-    r'letra_[a-zA-Z][a-zA-Z0-9]*'
-    t.value = str(t.value)    
-    return t
+	r'letra_[a-zA-Z][a-zA-Z0-9]*'
+	t.value = str(t.value)    
+	return t
 
 def t_STR_ID(t):
-    r'salita_[a-zA-Z][a-zA-Z0-9]*'
-    t.value = str(t.value)    
-    return t
+	r'salita_[a-zA-Z][a-zA-Z0-9]*'
+	t.value = str(t.value)    
+	return t
 
-def t_FLOAT_LIT(t):
-    r'[-]?\d*\.\d*'
-    t.value = float(t.value)    
-    return t
+def t_ID(t):
+    r'[a-zA-Z_][a-zA-Z_0-9]*'
+    t.type = reserved.get(t.value,'ID')    # Check for reserved words
+    if t.type == 'ID' and str(t.value).startswith('bilang_'):
+    	t_INT_ID(t)
+    elif t.type == 'ID':	
+    	t_error(t)
+    else:	
+    	return t
+def t_FLOAT_LIT(t ):
+	r'[-]?\d*\.\d*'
+	t.value = float(t.value)    
+	return t
 
-def t_INT_LIT(t):
-    r'[-]?\d+'
-    t.value = int(t.value)    
-    return t
+def t_INT_LIT(t ):
+	r'[-]?\d+'
+	t.value = int(t.value)    
+	return t
 
 def t_CHAR_LIT(t):
-    r'(L)?\'([^\\\n]|(\\.))*?\''
-    if len(str(t.value)) == 2:
-        t.value = ''	
-    else:
-        t.value = str(t.value)[1:len(str(t.value)) - 1]
-    return t
+	r'(L)?\'([^\\\n]|(\\.))*?\''
+	if len(str(t.value)) == 2:
+		t.value = ''	
+	else:
+		t.value = str(t.value)[1:len(str(t.value)) - 1]
+	return t
 
 def t_STR_LIT(t):
-    r'"([^\\\n]|(\\.))*?\"'
-    if len(str(t.value)) == 2:
-        t.value = ""
-    else:
-        t.value = str(t.value)[1:len(t.value)-1]	
-    return t
+	r'"(.|\n|\t)*?\"'
+	if len(str(t.value)) == 2:
+		t.value = ""
+	else:
+		t.value = str(t.value)[1:len(t.value)-1]	
+	return t
 
 #line comment
 def t_LINE_COMMENT(t):
-    r'\#.*'
-    print "Comment"
-    pass
+	r'\#.*'
+	print "Comment"
+	pass
 
 def t_MULTILINE_COMMENT(t):
     r'[~](.|\n)*?[~]'
@@ -187,34 +172,27 @@ def t_MULTILINE_COMMENT(t):
 t_ignore  = ' \t'
 
 
-def t_ID(t):
-    r'[a-zA-Z_][a-zA-Z_0-9]*'
-    t.type = reserved.get(t.value,'ID')    # Check for reserved words
-    if t.type == 'ID':
-    	t_error(t)
-    else:	
-    	return t
-		
-
 # Define a rule so we can track line INT_LITs
 def t_newline(t):
-    r'\n+'
-    t.lexer.lineno += len(t.value)
+	r'\n+'
+	t.lexer.lineno += len(t.value)
 
+# Build the lexer
+lexer = lex.lex()
 
-def runLexer(data):
-    lexer = lex.lex()
-    lexer.input(data)
+# Test it out
+data = '''
+-1
+-90.90 + -1
+'''
 
-    # Tokenize
-    while True:
-        tok = lexer.token()
-        if not tok: 
-            break      # No more input
-        print(tok)	
+# Give the lexer some input
+lexer.input(data)
 
-def runLexerOnFile(file_name):
-    puto_file = open(file_name, "r")
-    data =  puto_file.read()
-    runLexer(data)
-    puto_file.close()
+# Tokenize
+while True:
+    tok = lexer.token()
+    if not tok: 
+        break      # No more input
+    print(tok)
+	
