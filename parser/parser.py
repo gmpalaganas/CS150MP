@@ -61,7 +61,6 @@ def p_init_declarator_1(p):
 def p_init_declarator_2(p):
     'init_declarator : declarator ASSIGN_OP initializer'
     lookup[p[1]] = p[3]
-    print "lookup ", lookup[p[1]]
     p[0] = p[3]
     pass
 
@@ -94,7 +93,7 @@ def p_declarator_5(p):
     p[0] = p[2]
 
 def p_declarator_6(p):
-    'declarator : declarator LBRACKET constant_expression_opt RBRACKET'
+    'declarator : declarator LBRACKET constant RBRACKET'
 
 def p_initializer_1(p):
     'initializer : assignment_expression'
@@ -136,7 +135,7 @@ def p_fxn_prot_args_1(p):
 
 def p_fxn_prot_args_2(p):
     'fxn_prot_args : identifier'
-    p[0] = p[1]
+
 
 #statement
 def p_statement(p):
@@ -147,22 +146,20 @@ def p_statement(p):
               | selection_statement
               | iteration_statement
               | jump_statement
-              | io_statement
     '''
     p[0] = p[1]
     pass
 
-def p_io_statement_1(p):
-    'io_statement : PRINT LPAREN primary_expression RPAREN'
-    print p[3]
+#def p_io_statement_1(p):
+    #'io_statement : PRINT LPAREN logical_or_expression RPAREN'
+    #print p[3]
 
-def p_io_statement_2(p):
-    'io_statement : SCAN LPAREN RPAREN'
-    p[0] = raw_input()
+#def p_io_statement_2(p):
+    #'io_statement : SCAN LPAREN RPAREN'
+    #p[0] = raw_input()
 
 def p_labled_statement_1(p):
     'labeled_statement : identifier COLON statement'
-    
     pass
 
 def p_labeled_statement_2(p):
@@ -209,6 +206,7 @@ def p_selection_statement_1(p):
     if (p[3]):
         p[0] = p[5]
     elif(p[6] != None):
+        print "HERE"
         p[0] = p[6]
     pass
 
@@ -474,17 +472,16 @@ def p_postfix_expression_6(p):
     'postfix_expression : postfix_expression DEC'
     p[0] =p[1] - 1
 
-def primary_expression_1(p):
+def p_primary_expression_1(p):
     'primary_expression : identifier'
-    try:
-        p[0] = lookup[p[1]]
-    except:
-        print "error"
+    p[0] = lookup[p[1]]
 
 def p_primary_expression_2(p):
     '''
     primary_expression : constant
     '''
+#                       | identifier
+#    '''
     p[0] = p[1]
     #print  "Primary Exp ", p[0]
     pass
@@ -549,6 +546,5 @@ def parseString(data):
 def runParser(file_name):
     puto_file = open(file_name, "r")
     data = puto_file.read()
-    lexer.runLexer(file_name)
     parseString(data)
     puto_file.close()

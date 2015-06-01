@@ -188,7 +188,6 @@ def t_STR_LIT(t):
 
 def t_comment(t):
     r'(\#(.)*?\n)|(~(.|\n)*?~)'
-    print "Comment"
     t.lexer.lineno += t.value.count('\n')
     pass
 
