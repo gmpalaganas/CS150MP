@@ -48,12 +48,10 @@ def p_declaration_list_2(p):
 
 def p_init_declarator_list_1(p):
     'init_declarator_list : init_declarator'
-    
     pass
 
 def p_init_declaration_list_2(p):
     'init_declarator_list : init_declarator_list COMMA init_declarator'
-    
 
 def p_init_declarator_1(p):
     'init_declarator : declarator'
@@ -89,19 +87,13 @@ def p_declarator_4(p):
     lookup[p[2]] = ''
     p[0] = p[2]
     pass
-    
-def p_declarator_7(p):
-    'declarator : VAR NULL_ID'
-    lookup[p[2]] = null
-    p[0] = p[2]
-    pass
 
 def p_declarator_5(p):
     'declarator : LPAREN declarator RPAREN'
     p[0] = p[2]
 
 def p_declarator_6(p):
-    'declarator : declarator LBRACKET constant RBRACKET'
+    'declarator : declarator LBRACKET constant_expression_opt RBRACKET'
 
 def p_initializer_1(p):
     'initializer : assignment_expression'
@@ -143,7 +135,7 @@ def p_fxn_prot_args_1(p):
 
 def p_fxn_prot_args_2(p):
     'fxn_prot_args : identifier'
-
+    p[0] = p[1]
 
 #statement
 def p_statement(p):
@@ -154,17 +146,18 @@ def p_statement(p):
               | selection_statement
               | iteration_statement
               | jump_statement
+              | io_statement
     '''
     p[0] = p[1]
     pass
 
-#def p_io_statement_1(p):
-    #'io_statement : PRINT LPAREN logical_or_expression RPAREN'
-    #print p[3]
+def p_io_statement_1(p):
+    'io_statement : PRINT LPAREN logical_or_expression RPAREN'
+    print p[3]
 
-#def p_io_statement_2(p):
-    #'io_statement : SCAN LPAREN RPAREN'
-    #p[0] = raw_input()
+def p_io_statement_2(p):
+    'io_statement : SCAN LPAREN RPAREN'
+    p[0] = raw_input()
 
 def p_labled_statement_1(p):
     'labeled_statement : identifier COLON statement'
@@ -214,7 +207,6 @@ def p_selection_statement_1(p):
     if (p[3]):
         p[0] = p[5]
     elif(p[6] != None):
-        print "HERE"
         p[0] = p[6]
     pass
 
@@ -464,11 +456,9 @@ def p_postfix_expression_1(p):
 
 def p_postfix_expression_2(p):
     'postfix_expression : postfix_expression LBRACKET expression RBRACKET'
-    
 
 def p_postfix_expression_3(p):
     'postfix_expression : postfix_expression LPAREN argument_expression_list RPAREN'
-
 
 def p_postfix_expression_4(p):
     'postfix_expression : postfix_expression LPAREN RPAREN'
@@ -513,7 +503,6 @@ def p_identifier(p):
                | INT_ID
                | CHAR_ID
                | STR_ID
-               | NULL_ID
     '''
     
     p[0] = p[1]

@@ -15,6 +15,8 @@ reserved = {
 	'tuwing'		:	'FOR',
 	'gawin'			:	'DO',
 	'habang'		:	'WHILE',
+	'sulat'			:	'PRINT',
+	'kuha'			:	'SCAN',
 }
 tokens = [
 	# arithmetic ops
@@ -52,7 +54,6 @@ tokens = [
 	'INT_ID',
 	'CHAR_ID',
 	'STR_ID',
-	'NULL_ID',
 	#literals
 	'FLOAT_LIT',
 	'INT_LIT',
@@ -149,11 +150,6 @@ def t_STR_ID(t):
 	r'salita_[a-zA-Z][a-zA-Z0-9]*'
 	t.value = str(t.value)    
 	return t
-	
-def t_NULL_ID(t):
-	r'wala_[a-zA-Z][a-zA-Z0-9]*'
-	t.value = str(t.value)    
-	return t
 
 def t_ID(t):
     r'[a-zA-Z_][a-zA-Z_0-9]*'
@@ -192,6 +188,7 @@ def t_STR_LIT(t):
 
 def t_comment(t):
     r'(\#(.)*?\n)|(~(.|\n)*?~)'
+    print "Comment"
     t.lexer.lineno += t.value.count('\n')
     pass
 
