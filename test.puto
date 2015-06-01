@@ -6,16 +6,15 @@
 
 #Single Line Comment
 
-bilang_add(bilang_a,bilang_b);
+@bilang_add(bilang_a,bilang_b);
 
 bilang_puno(){
-    bilang_a = 0;
-    bilang_k;
-    5 + bilang_a * (3 + 5);
-    bilang_sum = bilang_add(bilang_a,bilang_k);
+    @bilang_a = 0;
+    @bilang_k = 5 + 3;
+    sulat(bilang_k);
     kung ( bilang_a < 3 && bilang_a > 1 ){
 
-        salita_s = "Hello World";
+        @salita_s = "Hello World";
         sulat(salita_s);
         letra_c[23];
         letra_x = 'c';
@@ -23,7 +22,7 @@ bilang_puno(){
     }
 }
 
-bilang_add(bilang_a,bilang_b){
+@bilang_add(bilang_a,bilang_b){
     
     balik bilang_a + bilang_b;
 

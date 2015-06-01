@@ -70,9 +70,12 @@ tokens = [
 	#unary_ops
 	'INC',
 	'DEC',
-        'NOT',
-        #ternary,
-        'COND_OP',
+    'NOT',
+    #ternary,
+    'COND_OP',
+    #var
+    'VAR',
+
 
 ] + list(reserved.values())
 
@@ -116,9 +119,11 @@ t_NOT                   = r'!'
 
 t_COND_OP               = r'\?'
 
+t_VAR           =  r'@'
+
 # Error handling rule
 def t_error(t):
-	print("Illegal character %s at line %s column %s" % (t.value[0], t.lineno, t.lexpos))
+	print("Illegal character %s at line %s" % (t.value[0], t.lineno))
 	t.lexer.skip(1)
 
 def t_MAIN(t):
