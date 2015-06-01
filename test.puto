@@ -11,11 +11,9 @@
 bilang_puno(){
     @bilang_a = 0;
     @bilang_k = 5 + 3;
-    sulat(bilang_a);
     kung ( bilang_a < 3 && bilang_a > 1 ){
 
         @salita_s = "Hello World";
-        sulat(salita_s);
 
     }
 }

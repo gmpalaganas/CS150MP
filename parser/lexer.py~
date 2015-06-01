@@ -52,7 +52,6 @@ tokens = [
 	'INT_ID',
 	'CHAR_ID',
 	'STR_ID',
-	'NULL_ID',
 	#literals
 	'FLOAT_LIT',
 	'INT_LIT',
@@ -147,11 +146,6 @@ def t_CHAR_ID(t):
 
 def t_STR_ID(t):
 	r'salita_[a-zA-Z][a-zA-Z0-9]*'
-	t.value = str(t.value)    
-	return t
-	
-def t_NULL_ID(t):
-	r'wala_[a-zA-Z][a-zA-Z0-9]*'
 	t.value = str(t.value)    
 	return t
 
