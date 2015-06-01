@@ -1,0 +1,174 @@
+# This program tests the compiler.   
+# the first part of the code, outputs error.
+# the commented part of the code (bottom part) is the correct code.
+# you may comment out all the "TEST DATA" then uncomment the "SOURCE CODE" to check the validity.
+
+
+~
+# TEST DATA
+
+bilang_puno ( ) {						
+	
+	bilang_i = 0							# error. no terminal sign.						
+	greeting[] = "Hello World"; 			# error. no data type in the beginning of variable.
+	
+	print ("Anong pangalan mo?");			# error. wrong syntax o print. must be sulat().	
+	titik_name = kuha;						# error. wrong syntax of scan. must be kuha().				
+	
+	sulat (titik_greeting);					
+	sulat ("\n");
+	sulat (titik_name);
+	sulat ("\n\n");	
+	
+	sulat ("Anong edad mo? ");		
+	bilang_age = kuha();
+
+	sulat (" Bilangin natin ang edad mo! \n");
+
+	habang ( bilang_i != bilang_age ) 					# error. missing parenthesis.
+		 bilang_i = bilang_i + 1 ;
+		 sulat (bilang_i);
+		 sulat ("\n");
+	}
+
+	sulat ("edad mo na ay: ");
+	sulat ( bilang_age );
+	sulat ("\n");
+
+	tuwing ( bilang_i = 0 ; bilang_i = bilang_i+1 ){		# error. no condition in for loop statement.
+			sulat ( " Eto ulit ang edad mo: " ) ;
+			sulat ( bilang_age ) ;
+	}
+
+
+	sulat ("\n Tignan natin kung saang range ng edad ka nababagay! \n");
+	sulat ("Ang hatol ay: ");
+
+	kung (bilang_age < 0){								
+		sulat (" Bawal yun. ");
+	}
+	edikung (bilang_age < 18){							# error. wrong syntax. edikung must be ediKung.
+		sulat (" Minor ka! ");
+	}
+	ediKung (bilang_age = 18){							# error. '=' is not a comparison operator.
+		sulat (" Nuxx! di na minor! ");
+	}
+	ediKung(bilang_age >= 60){
+		sulat (" Senior na po! haha ");  
+	}
+	edi{
+		sulat (" Di minor! ") ;
+	}
+
+	sulat ("\n\n Isa pang hatol: ");
+	
+	palit ( bilang_age ) {														
+		kaso 18 : 
+			sulat (" Debut ni girl ");					# error. no break.
+		kaso 21 :
+			sulat (" Debut ni boy ");
+			putulin ;
+		walangKaso:
+			sulat (" Huwag magdebut ");
+			putulin;
+	}
+
+	add(bilang_age);									# error. missing parameters. 	
+}
+
+wala add ( bilang_x , bilang_y ) {								# error. no constructor above
+	bilang_z = bilang_x + bilang_y ;
+	sulat ( "\n Dagdagan natin ng 100 ang edad mo. \n ") ;
+	sulat ("Ang edad mo sa susunod na 100 years ay: ")
+	sulat ( bilang_z ) ;
+}
+
+~
+
+
+
+
+
+
+
+
+~
+# SOURCE CODE
+
+wala add(bilang_x , bilang_y);			# initialization of function. constructor.
+
+bilang_puno ( ) {						# main function
+	
+	bilang_i = 0;						# declaring int 
+	titik_greeting[] = "Hello World"; 	# declaring strings
+	
+	sulat ("Anong pangalan mo?");		# for printing
+	titik_name = kuha();				# for scanning	
+	
+	sulat (titik_greeting);				
+	sulat ("\n");
+	sulat (titik_name);
+	sulat ("\n\n");	
+	
+	sulat ("Anong edad mo? ");		
+	bilang_age = kuha();
+
+	sulat (" Bilangin natin ang edad mo! \n");
+	habang ( bilang_i != bilang_age ) {				#  while loop in puto
+		 bilang_i = bilang_i + 1 ;
+		 sulat (bilang_i);
+		 sulat ("\n");
+	}
+	sulat ("edad mo na ay: ");
+	sulat ( bilang_age );
+	sulat ("\n");
+
+	tuwing ( bilang_i = 0 ; bilang_i < bilang age ; bilang_i = bilang_i+1 ){		# for loop in puto
+			sulat ( " Eto ulit ang edad mo: " ) ;
+			sulat ( bilang_age ) ;
+	}
+
+
+	sulat ("\n Tignan natin kung saang range ng edad ka nababagay! \n");
+	sulat ("Ang hatol ay: ");
+
+	kung (bilang_age < 0){							# if-elseif-else statemet in puto
+		sulat (" Bawal yun. ");
+	}
+	ediKung (bilang_age < 18){
+		sulat (" Minor ka! ");
+	}
+	ediKung (bilang_age == 18){
+		sulat (" Nuxx! di na minor! ");
+	}
+	ediKung(bilang_age >= 60){
+		sulat (" Senior na po! haha ");  
+	}
+	edi{
+		sulat (" Di minor! ") ;
+	}
+
+	sulat ("\n\n Isa pang hatol: ");
+	palit ( bilang_age ) {								# switch case in puto
+		kaso 18 : 
+			sulat (" Debut ni girl ");
+			putulin ;
+		kaso 21 :
+			sulat (" Debut ni boy ");
+			putulin ;
+		walangKaso:
+			sulat (" Huwag magdebut ");
+			putulin;
+	}
+
+	add(bilang_age , 100);								# function call
+}
+
+wala add ( bilang_x , bilang_y ) {						# function
+	bilang_z = bilang_x + bilang_y ;
+	sulat ( "\n Dagdagan natin ng 100 ang edad mo. \n ") ;
+	sulat ("Ang edad mo sa susunod na 100 years ay: ")
+	sulat ( bilang_z ) ;
+}
+
+~

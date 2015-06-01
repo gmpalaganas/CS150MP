@@ -1,4 +1,5 @@
 import ply.lex as lex
+import logging
 
 reserved = {
 	'wala'			:	'NULL',
@@ -6,10 +7,11 @@ reserved = {
 	'putol'			:	'BREAK',
 	'tuloy'			:	'CONTINUE',
 	'kung'			:	'IF',
+        'iba'                   :       'ELSE',
 	'ediKung'		:	'ELSE_IF',
 	'palit'			:	'SWITCH',
 	'kaso'			:	'CASE',
-	'walangKaso'	:	'DEFAULT',
+	'walangKaso'	        :	'DEFAULT',
 	'tuwing'		:	'FOR',
 	'gawin'			:	'DO',
 	'habang'		:	'WHILE',
@@ -31,7 +33,12 @@ tokens = [
 	'LT',
 	'LE',
 	#assign op
-	'ASSIGN_OP',
+	'ADD_ASSIGN',
+        'MIN_ASSIGN',
+        'MUL_ASSIGN',
+        'DIV_ASSIGN',
+        'MOD_ASSIGN',
+        'ASSIGN_OP',
 	#logial ops
 	'AND',
 	'OR',
@@ -54,6 +61,7 @@ tokens = [
 	'STR_LIT',	
 	#other
 	'SEMI',
+        'COLON',
 	'COMMA',
 	'LINE_COMMENT',
 	'MULTILINE_COMMENT',
@@ -62,12 +70,15 @@ tokens = [
 	#unary_ops
 	'INC',
 	'DEC',
+        'NOT',
+        #ternary,
+        'COND_OP',
 
 ] + list(reserved.values())
 
-t_ADD_OP    	= r" \+ "
+t_ADD_OP                = r" \+ "
 t_SUB_OP   		= r'-'
-t_MULT_OP   	= r'\*'
+t_MULT_OP               = r'\*'
 t_DIV_OP  		= r'/'
 t_MOD_OP  		= r'%'
 
@@ -78,6 +89,11 @@ t_GE 			= r'>='
 t_LT 			= r'<'
 t_LE 			= r'<='
 
+t_ADD_ASSIGN            = r'\+='
+t_MIN_ASSIGN            = r'-='
+t_MUL_ASSIGN            = r'\*='
+t_DIV_ASSIGN            = r'/='
+t_MOD_ASSIGN            = r'%='
 t_ASSIGN_OP		= r'='
 
 t_AND			= r'&&'
@@ -91,14 +107,18 @@ t_LBRACKET		= r'\['
 t_RBRACKET		= r'\]'	
 
 t_SEMI			= r';'
+t_COLON                 = r':'
 t_COMMA			= r','
 
 t_INC 			= r'\+\+'
 t_DEC			= r'--'
+t_NOT                   = r'!'
+
+t_COND_OP               = r'\?'
 
 # Error handling rule
 def t_error(t):
-	print("Illegal character '%s' at line %s column %s" % (t.value[0], t.lineno, t.lexpos))
+	print("Illegal character %s at line %s column %s" % (t.value[0], t.lineno, t.lexpos))
 	t.lexer.skip(1)
 
 def t_MAIN(t):
@@ -161,21 +181,14 @@ def t_STR_LIT(t):
 		t.value = str(t.value)[1:len(t.value)-1]	
 	return t
 
-#line comment
-def t_LINE_COMMENT(t):
-	r'\#.*'
-	print "Comment"
-	pass
-
-def t_MULTILINE_COMMENT(t):
-    r'[~](.|\n)*?[~]'
+def t_comment(t):
+    r'(\#(.)*?\n)|(~(.|\n)*?~)'
+    print "Comment"
     t.lexer.lineno += t.value.count('\n')
-    return t
-
-#for reserved words
+    pass
 
 # A string containing ignored characters (spaces and tabs)
-t_ignore  = ' \t'
+t_ignore  = ' \t\x0c'
 
 
 # Define a rule so we can track line INT_LITs
@@ -183,24 +196,29 @@ def t_newline(t):
 	r'\n+'
 	t.lexer.lineno += len(t.value)
 
-# Build the lexer
-lexer = lex.lex()
+logging.basicConfig(
+        level = logging.DEBUG,
+        filename = "debug.txt",
+        filemode = "w",
+        format = "%(filename)10s:%(lineno)4d:%(message)s"
+        )
 
-# Test it out
-data = '''
--1
--90.90 + -1
-bilang_a++
--90.90+90--
-'''
+log = logging.getLogger()
 
-# Give the lexer some input
-lexer.input(data)
+lexer = lex.lex(debug=True,debuglog=log)
 
-# Tokenize
-while True:
-    tok = lexer.token()
-    if not tok: 
-        break      # No more input
-    print(tok)
-	
+def tokenizeString(data):
+    lexer.input(data)
+
+    # Tokenize
+    while True:
+        tok = lexer.token()
+        if not tok: 
+            break      # No more input
+        print(tok)	
+
+def runLexer(file_name):
+    puto_file = open(file_name, "r")
+    data =  puto_file.read()
+    tokenizeString(data)
+    puto_file.close()

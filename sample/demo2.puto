@@ -1,0 +1,34 @@
+~
+Puto Language
+Demo 2
+
+A program that will output a right riangle of height n, where n is a user input.
+
+ex.
+input: 5
+output:
+
+*
+**
+***
+****
+*****
+~
+
+bilang_puno(){	
+	bilang_a = kuha();
+	
+	bilang_b = 1;
+	
+	habang (bilang_b <= bilang_a){
+		bilang_c = 1 ;
+		
+		habang (bilang_c <= bilang_b){
+			sulat ( "*" ) ;
+			bilang_c = bilang_c + 1 ; 
+		}
+		
+		sulat ( "\n" ) ;
+		bilang_b = bilang_b + 1 ;
+	}
+}
