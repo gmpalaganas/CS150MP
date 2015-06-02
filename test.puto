@@ -57,5 +57,13 @@ bilang_puno(){
     }habang(bilang_i < 10);
 
     @letra_hello = 'a';
+    sulat(bilang_add(bilang_a,bilang_k));
     
+    balik 0;
+}
+
+@bilang_add(bilang_a,bilang_b){
+    
+    balik bilang_a + bilang_b;    
+
 }

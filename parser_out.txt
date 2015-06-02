@@ -600,6 +600,43 @@ Children:
 															Children:
 																No Children
 
+														AST Node "mix_list":
+														Value: None
+														Children:
+															AST Node "print_expression":
+															Value: sulat
+															Children:
+																AST Node "function_call":
+																Value: None
+																Children:
+																	AST Node "int_identifier":
+																	Value: bilang_add
+																	Children:
+																		No Children
+																	AST Node "argument_expression_list":
+																	Value: None
+																	Children:
+																		AST Node "int_identifier":
+																		Value: bilang_a
+																		Children:
+																			No Children
+																		AST Node "int_identifier":
+																		Value: bilang_k
+																		Children:
+																			No Children
+
+
+
+															AST Node "mix_list":
+															Value: None
+															Children:
+																AST Node "return_statement":
+																Value: balik
+																Children:
+																	AST Node "int_constant":
+																	Value: 0
+																	Children:
+																		No Children
 
 
 
@@ -613,9 +650,68 @@ Children:
 
 
 
-	AST Node "empty":
+
+
+
+	AST Node "external_declaration":
 	Value: None
 	Children:
-		No Children
+		AST Node "fxn_declaration":
+		Value: None
+		Children:
+			AST Node "fxn_declaration":
+			Value: @
+			Children:
+				AST Node "int_identifier":
+				Value: bilang_add
+				Children:
+					No Children
+				AST Node "fxn_args":
+				Value: ,
+				Children:
+					AST Node "int_identifier":
+					Value: bilang_a
+					Children:
+						No Children
+					AST Node "fxn_args":
+					Value: None
+					Children:
+						AST Node "int_identifier":
+						Value: bilang_b
+						Children:
+							No Children
+
+
+
+			AST Node "compound_statement":
+			Value: None
+			Children:
+				AST Node "mix_list":
+				Value: None
+				Children:
+					AST Node "return_statement":
+					Value: balik
+					Children:
+						AST Node "binary_expression":
+						Value: +
+						Children:
+							AST Node "int_identifier":
+							Value: bilang_a
+							Children:
+								No Children
+							AST Node "int_identifier":
+							Value: bilang_b
+							Children:
+								No Children
+
+
+
+
+
+		AST Node "empty":
+		Value: None
+		Children:
+			No Children
+
 
 
