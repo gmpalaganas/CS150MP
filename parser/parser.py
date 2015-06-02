@@ -42,10 +42,6 @@ class ASTNode:
         self.leaf = leaf
 
     def toString(self,prefix=0):
-        if self.leaf:
-            leaf_str = self.leaf
-        else:
-            leaf_str = "None"
         
         msg = ""
 
@@ -53,7 +49,7 @@ class ASTNode:
             msg += (prefix - 1) * "\t"
 
         msg = "AST Node \"%s\":\n" % self.type
-        msg += prefix * "\t" + "Value: %s\n" % leaf_str 
+        msg += prefix * "\t" + "Value: %s\n" % self.leaf 
         msg +=  prefix * "\t" +"Children:\n"
             
         if len(self.children) == 0:
@@ -492,6 +488,7 @@ def p_constant(p):
              | STR_LIT
     '''
     p[0] = ASTNode("constant",  leaf = p[1] )    
+    print "constant: ",  p[1]
     pass
 
 def p_empty(p):
