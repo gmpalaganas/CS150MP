@@ -13,12 +13,17 @@ bilang_puno(){
     @bilang_k = 5 + 3;
     @tuldok_pi = 3.1415;
 
+    ~
+        Eto yung magic na sinasabi ko sa if-else
+        di ba oh? Medyo na pa ooooooooh ako nung na realize ko
+        Genius C
+    ~
     kung ( bilang_a < 3 && bilang_a > 1 ){
 
         @salita_s = "Hello World";
 
         sulat(salita_s);
-
+        #This here is a nested compound statement
         @bilang_j = 0;
         tuwing(bilang_j; bilang_j < 3; bilang_j++){
             sulat(bilang_j);
