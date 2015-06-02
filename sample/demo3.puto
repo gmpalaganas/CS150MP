@@ -9,8 +9,8 @@
 
 bilang_puno ( ) {						
 	
-	bilang_i = 0							# error. no terminal sign.						
-	greeting[] = "Hello World"; 			# error. no data type in the beginning of variable.
+	@bilang_i = 0							# error. no terminal sign.						
+	@greeting[] = "Hello World"; 			# error. no data type in the beginning of variable.
 	
 	print ("Anong pangalan mo?");			# error. wrong syntax o print. must be sulat().	
 	titik_name = kuha;						# error. wrong syntax of scan. must be kuha().				
@@ -76,8 +76,8 @@ bilang_puno ( ) {
 	add(bilang_age);									# error. missing parameters. 	
 }
 
-wala add ( bilang_x , bilang_y ) {								# error. no constructor above
-	bilang_z = bilang_x + bilang_y ;
+@wala_add ( bilang_x , bilang_y ) {								# error. no constructor above
+	@bilang_z = bilang_x + bilang_y ;
 	sulat ( "\n Dagdagan natin ng 100 ang edad mo. \n ") ;
 	sulat ("Ang edad mo sa susunod na 100 years ay: ")
 	sulat ( bilang_z ) ;
@@ -85,25 +85,18 @@ wala add ( bilang_x , bilang_y ) {								# error. no constructor above
 
 ~
 
-
-
-
-
-
-
-
 ~
 # SOURCE CODE
 
-wala add(bilang_x , bilang_y);			# initialization of function. constructor.
+@wala_add(bilang_x , bilang_y);			# initialization of function. constructor.
 
 bilang_puno ( ) {						# main function
 	
-	bilang_i = 0;						# declaring int 
-	titik_greeting[] = "Hello World"; 	# declaring strings
+	@bilang_i = 0;						# declaring int 
+	@titik_greeting[] = "Hello World"; 	# declaring strings
 	
 	sulat ("Anong pangalan mo?");		# for printing
-	titik_name = kuha();				# for scanning	
+	@titik_name = kuha();				# for scanning	
 	
 	sulat (titik_greeting);				
 	sulat ("\n");
@@ -111,7 +104,7 @@ bilang_puno ( ) {						# main function
 	sulat ("\n\n");	
 	
 	sulat ("Anong edad mo? ");		
-	bilang_age = kuha();
+	@bilang_age = kuha();
 
 	sulat (" Bilangin natin ang edad mo! \n");
 	habang ( bilang_i != bilang_age ) {				#  while loop in puto
@@ -164,7 +157,7 @@ bilang_puno ( ) {						# main function
 	add(bilang_age , 100);								# function call
 }
 
-wala add ( bilang_x , bilang_y ) {						# function
+wala_add ( bilang_x , bilang_y ) {						# function
 	bilang_z = bilang_x + bilang_y ;
 	sulat ( "\n Dagdagan natin ng 100 ang edad mo. \n ") ;
 	sulat ("Ang edad mo sa susunod na 100 years ay: ")

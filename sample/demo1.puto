@@ -6,13 +6,14 @@ bilang_puno(){
 	sulat("These program computes for the leap year within the specified range of the user \n");
 	
 	sulat("Enter the first year range: ");
-	bilang_range1 = kuha();
+	@bilang_range1 = kuha();
 	
 	sulat("Enter the first second range: ");
-	bilang_range2 = kuha();
+	@bilang_range2 = kuha();
 	
 	sulat("The leap year/s within the specified range is/are: \n");
-	
+    
+    @bilang_i;
 	tuwing( bilang_i = bilang_range1 ; bilang_i <= bilang_range2 ; bilang_i = bilang_i + 1 ){
 		kung (bilang_i % 4 == 0 && bilang_i % 100!= 0 || bilang_i % 400 == 0){
 			sulat(bilang_i);

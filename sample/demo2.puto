@@ -16,9 +16,9 @@ output:
 ~
 
 bilang_puno(){	
-	bilang_a = kuha();
+	@bilang_a = kuha();
 	
-	bilang_b = 1;
+	@bilang_b = 1;
 	
 	habang (bilang_b <= bilang_a){
 		bilang_c = 1 ;
