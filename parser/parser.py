@@ -7,7 +7,7 @@ tokens = lexer.tokens
 '''
 REMAINING TASKS:
     >Code Generator/Executor
-        >Note: Use the AST produced by the parser it is the output of runParser() 
+        >Note: Use the AST produced by the parser, it is the output of runParser() 
             >see runParser()
 
 ON AST:
@@ -16,12 +16,12 @@ To put it simply:
     >type -> what is the current node? is it a statement? an identifier? etc
           -> this will define what you will do with the node
     >children -> you can think of this as the parameters of the node
-              -> basically you have to (depending on the node type) these first to be able to evaluate this node
+              -> basically you have to evaluate (depending on the node type) these first to be able to evaluate this node
     >leaf -> this contains the "operation" to be done in this node
           -> Examples:
             ASTNode("print_statement", ASTNode("constant","Hello World") , "sulat") == sulat("Hello World")
 
-            ASTNode("if_statement", [ 
+            ASTNode("if_else_statement", [ 
                 ASTNode("relational_expression", [ 
                     ASTNode("identifier", bilang_x),
                     ASTNode("constant", 3) 
@@ -56,10 +56,7 @@ class ASTNode:
             msg += prefix * "\t" + "\tNo Children\n"
         else:
             for child in self.children:
-                if isinstance(child, ASTNode):
-                    msg += prefix * "\t" + "\t" + child.toString(prefix + 1)
-                else:
-                    msg += prefix * "\t" + "\t" + child.__str__()
+                msg += prefix * "\t" + "\t" + child.toString(prefix + 1)
             msg += "\n"
 
         return msg
@@ -127,12 +124,9 @@ def p_init_declarator_2(p):
 # Variable declaration e.g @bilang_a
 def p_declarator_1(p):
     '''
-    declarator : VAR FLOAT_ID
-               | VAR INT_ID
-               | VAR CHAR_ID
-               | VAR STR_ID
+    declarator : VAR identifier 
     '''
-    p[0] = ASTNode("var_declarator",[ p[2] ], p[1]) 
+    p[0] = ASTNode("var_declarator",[ p[2] ]) 
 
 def p_declarator_5(p):
     'declarator : LPAREN declarator RPAREN'
@@ -197,18 +191,9 @@ def p_statement(p):
               | selection_statement
               | iteration_statement
               | jump_statement
-              | io_statement
     '''
     p[0] = p[1]
     pass
-
-def p_io_statement_1(p):
-    'io_statement : PRINT LPAREN logical_or_expression RPAREN'
-    p[0] = ASTNode("print_statement", [ p[3] ], p[1])
-
-def p_io_statement_2(p):
-    'io_statement : SCAN LPAREN RPAREN'
-    p[0] = ASTNode("scan_statement", leaf=p[1])
 
 def p_labeled_statement_1(p):
     'labeled_statement : CASE constant_expression COLON statement'
@@ -301,15 +286,23 @@ def p_expression_opt_2(p):
     p[0] = p[1]
 
 def p_expression_1(p):
-    'expression : assignment_expression'
+    'expression : print_expression'
     p[0] = p[1]
 
 def p_expression_2(p):
-    'expression : expression COMMA assignment_expression'
+    'expression : expression COMMA print_expression'
     p[0] = ASTNode("expression", [ p[1], p[3] ], p[2])
 
+def p_print_expression_1(p):
+    'print_expression : assignment_expression'
+    p[0] = p[1]
+
+def p_print_expression_2(p):
+    'print_expression : PRINT LPAREN logical_or_expression RPAREN'
+    p[0] = ASTNode("print_expression", [ p[3] ], p[1])
+
 def p_assignment_expression_1(p):
-    'assignment_expression : conditional_expression'
+    'assignment_expression : scan_expression'
     p[0] = p[1]
 
 def p_assignment_expression_2(p):
@@ -322,6 +315,15 @@ def p_assignment_expression_2(p):
                           | unary_expression MOD_ASSIGN assignment_expression
     '''
     p[0] = ASTNode("assignment_expression", [ p[1], p[3] ], p[2])
+
+def p_scan_expression_1(p):
+    'scan_expression : conditional_expression'
+    p[0] = p[1]
+
+def p_scan_expression_2(p):
+    'scan_expression : SCAN LPAREN RPAREN'
+    p[0] = ASTNode("scan_expression", leaf=p[1])
+
 
 # (cond)?exp:exp;
 def p_conditional_expression_1(p):
@@ -469,35 +471,45 @@ def p_argument_expression_list_2(p):
     'argument_expression_list : argument_expression_list COMMA assignment_expression'
     p[0] = ASTNode("argument_expression_list",[ p[1], p[3] ])
 
-def p_identifier(p):
-    '''
-    identifier : FLOAT_ID 
-               | INT_ID
-               | CHAR_ID
-               | STR_ID
-    '''
-    p[0] = ASTNode("identifier", leaf =  p[1] )
+def p_identifier_1(p):
+    'identifier : FLOAT_ID '
+    p[0] = ASTNode("float_identifier", leaf =  p[1] )
     
-    pass
+def p_identifier_2(p):
+    'identifier : INT_ID'
+    p[0] = ASTNode("int_identifier", leaf =  p[1] )
+
+def p_identifier_3(p):
+    'identifier : CHAR_ID'
+    p[0] = ASTNode("char_identifier", leaf =  p[1] )
+
+def p_identifier_4(p):
+    'identifier : STR_ID'
+    p[0] = ASTNode("str_identifier", leaf =  p[1] )
 
 def p_constant(p):
-    '''
-    constant : FLOAT_LIT
-             | INT_LIT
-             | CHAR_LIT
-             | STR_LIT
-    '''
-    p[0] = ASTNode("constant",  leaf = p[1] )    
-    print "constant: ",  p[1]
-    pass
+    'constant : FLOAT_LIT'
+    p[0] = ASTNode("float_constant",  leaf = p[1] ) 
+
+def p_constant_2(p):
+    'constant : INT_LIT'
+    p[0] = ASTNode("int_constant",  leaf = p[1] ) 
+
+def p_constant_3(p):
+    'constant : CHAR_LIT'
+    p[0] = ASTNode("char_constant",  leaf = p[1] ) 
+
+def p_constant_4(p):
+    'constant : STR_LIT'
+    p[0] = ASTNode("str_constant",  leaf = p[1] ) 
 
 def p_empty(p):
     'empty : '
     pass
 
 def p_error(p):
-    print "Syntax Error ", p 
-    pass 
+    print "Syntax Error at line ", p.lineno, " on ", p.value
+    exit(1)
 
 def parseString(data):
 

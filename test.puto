@@ -11,10 +11,18 @@
 bilang_puno(){
     @bilang_a = 0;
     @bilang_k = 5 + 3;
+    @tuldok_pi = 3.1415;
     kung ( bilang_a < 3 && bilang_a > 1 ){
 
         @salita_s = "Hello World";
+        sulat(salita_s);
 
+    }iba kung( bilang_a < 1)
+        sulat("wala eh");
+    iba{
+        @salita_input = kuha();
+        sulat(salita_input);
     }
+    
 }
 

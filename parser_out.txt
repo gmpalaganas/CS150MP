@@ -1,11 +1,5 @@
 Comment
 Comment
-constant:  0
-constant:  5
-constant:  3
-constant:  3
-constant:  1
-constant:  Hello World
 AST Node "start":
 Value: None
 Children:
@@ -18,21 +12,21 @@ Children:
 			AST Node "fxn_declaration":
 			Value: @
 			Children:
-				AST Node "identifier":
+				AST Node "int_identifier":
 				Value: bilang_add
 				Children:
 					No Children
 				AST Node "fxn_args":
 				Value: ,
 				Children:
-					AST Node "identifier":
+					AST Node "int_identifier":
 					Value: bilang_a
 					Children:
 						No Children
 					AST Node "fxn_args":
 					Value: None
 					Children:
-						AST Node "identifier":
+						AST Node "int_identifier":
 						Value: bilang_b
 						Children:
 							No Children
@@ -54,37 +48,65 @@ Children:
 			AST Node "declaration_list":
 			Value: None
 			Children:
+				AST Node "declaration_list":
+				Value: None
+				Children:
+					AST Node "init_declarator":
+					Value: =
+					Children:
+						AST Node "var_declarator":
+						Value: None
+						Children:
+							AST Node "int_identifier":
+							Value: bilang_a
+							Children:
+								No Children
+
+						AST Node "int_constant":
+						Value: 0
+						Children:
+							No Children
+
+					AST Node "init_declarator":
+					Value: =
+					Children:
+						AST Node "var_declarator":
+						Value: None
+						Children:
+							AST Node "int_identifier":
+							Value: bilang_k
+							Children:
+								No Children
+
+						AST Node "binary_expression":
+						Value: +
+						Children:
+							AST Node "int_constant":
+							Value: 5
+							Children:
+								No Children
+							AST Node "int_constant":
+							Value: 3
+							Children:
+								No Children
+
+
+
 				AST Node "init_declarator":
 				Value: =
 				Children:
 					AST Node "var_declarator":
-					Value: @
+					Value: None
 					Children:
-						bilang_a
-					AST Node "constant":
-					Value: 0
+						AST Node "float_identifier":
+						Value: tuldok_pi
+						Children:
+							No Children
+
+					AST Node "float_constant":
+					Value: 3.1415
 					Children:
 						No Children
-
-				AST Node "init_declarator":
-				Value: =
-				Children:
-					AST Node "var_declarator":
-					Value: @
-					Children:
-						bilang_k
-					AST Node "binary_expression":
-					Value: +
-					Children:
-						AST Node "constant":
-						Value: 5
-						Children:
-							No Children
-						AST Node "constant":
-						Value: 3
-						Children:
-							No Children
-
 
 
 			AST Node "if_else_statement":
@@ -96,11 +118,11 @@ Children:
 					AST Node "relational_expression":
 					Value: <
 					Children:
-						AST Node "identifier":
+						AST Node "int_identifier":
 						Value: bilang_a
 						Children:
 							No Children
-						AST Node "constant":
+						AST Node "int_constant":
 						Value: 3
 						Children:
 							No Children
@@ -108,27 +130,95 @@ Children:
 					AST Node "relational_expression":
 					Value: >
 					Children:
-						AST Node "identifier":
+						AST Node "int_identifier":
 						Value: bilang_a
 						Children:
 							No Children
-						AST Node "constant":
+						AST Node "int_constant":
 						Value: 1
 						Children:
 							No Children
 
 
-				AST Node "init_declarator":
-				Value: =
+				AST Node "compound_statement":
+				Value: None
 				Children:
-					AST Node "var_declarator":
-					Value: @
+					AST Node "init_declarator":
+					Value: =
 					Children:
-						salita_s
-					AST Node "constant":
-					Value: Hello World
+						AST Node "var_declarator":
+						Value: None
+						Children:
+							AST Node "str_identifier":
+							Value: salita_s
+							Children:
+								No Children
+
+						AST Node "str_constant":
+						Value: Hello World
+						Children:
+							No Children
+
+					AST Node "print_expression":
+					Value: sulat
 					Children:
-						No Children
+						AST Node "str_identifier":
+						Value: salita_s
+						Children:
+							No Children
+
+
+				AST Node "if_else_statement":
+				Value: kung
+				Children:
+					AST Node "relational_expression":
+					Value: <
+					Children:
+						AST Node "int_identifier":
+						Value: bilang_a
+						Children:
+							No Children
+						AST Node "int_constant":
+						Value: 1
+						Children:
+							No Children
+
+					AST Node "print_expression":
+					Value: sulat
+					Children:
+						AST Node "str_constant":
+						Value: wala eh
+						Children:
+							No Children
+
+					AST Node "compound_statement":
+					Value: None
+					Children:
+						AST Node "init_declarator":
+						Value: =
+						Children:
+							AST Node "var_declarator":
+							Value: None
+							Children:
+								AST Node "str_identifier":
+								Value: salita_input
+								Children:
+									No Children
+
+							AST Node "scan_expression":
+							Value: kuha
+							Children:
+								No Children
+
+						AST Node "print_expression":
+						Value: sulat
+						Children:
+							AST Node "str_identifier":
+							Value: salita_input
+							Children:
+								No Children
+
+
 
 
 
