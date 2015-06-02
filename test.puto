@@ -12,10 +12,18 @@ bilang_puno(){
     @bilang_a = 0;
     @bilang_k = 5 + 3;
     @tuldok_pi = 3.1415;
+
     kung ( bilang_a < 3 && bilang_a > 1 ){
 
         @salita_s = "Hello World";
+
         sulat(salita_s);
+
+        @bilang_j = 0;
+        tuwing(bilang_j; bilang_j < 3; bilang_j++){
+            sulat(bilang_j);
+            sulat("\n");
+        }
 
     }iba kung( bilang_a < 1)
         sulat("wala eh");
@@ -24,5 +32,25 @@ bilang_puno(){
         sulat(salita_input);
     }
     
-}
+    @bilang_i = 0;
+    habang(bilang_i > 10){
+        sulat(bilang_i);
+        sulat("\n");
+        bilang_i++;
+    }
+    
+    @bilang_arr[3] = { 1, 2, 3 };
+    tuwing(bilang_i = 0; bilang_i < 3; bilang_i++)
+        sulat(bilang_arr[bilang_i]);
 
+    bilang_i = 0;
+
+    gawin{
+        sulat(bilang_i);
+        sulat("\n");
+        bilang_i++;
+    }habang(bilang_i > 10);
+
+    @letra_hello = 'a';
+    
+}

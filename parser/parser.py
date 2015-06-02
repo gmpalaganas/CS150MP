@@ -208,20 +208,26 @@ def p_expression_statement(p):
     p[0] = p[1]
 
 def p_compound_statement_1(p):
-    'compound_statement : LBRACE declaration_list statement_list RBRACE'
-    p[0] = ASTNode("compound_statement", [ p[2], p[3] ])
-
-
-def p_compund_statement_2(p):
-    '''
-    compound_statement : LBRACE statement_list RBRACE
-                       | LBRACE declaration_list RBRACE
-    '''
-    p[0] = p[2]
+    'compound_statement : LBRACE mix_list RBRACE'
+    p[0] = ASTNode("compound_statement", [ p[2] ])
 
 def p_compund_statement_4(p):
     'compound_statement : LBRACE RBRACE'
     p[0] = ASTNode("empty_compound_statement")
+
+def p_mix_list_1(p):
+    '''
+    mix_list : statement_list
+             | declaration_list
+    '''
+    p[0] = ASTNode("mix_list", [ p[1] ])
+
+def p_mix_list_2(p):
+    '''
+    mix_list : statement_list mix_list
+             | declaration_list mix_list
+    '''
+    p[0] = ASTNode("mix_list", [ p[1], p[2] ]) 
 
 def p_statement_list_1(p):
     'statement_list : statement'
@@ -229,7 +235,7 @@ def p_statement_list_1(p):
 
 def p_statement_list_2(p):
     'statement_list : statement_list statement'
-    p[0] = p[1]
+    p[0] = ASTNode("statement_list", [ p[1] ])
 
 '''
 If ever mag-taka kayo bakit walang ELSE IF kasi may magic
@@ -249,20 +255,20 @@ def p_else_if_statement_2(p):
     'else_if_statement : empty'
     p[0] = ASTNode("empty")
 
-def p_selection_statement_3(t):
+def p_selection_statement_3(p):
     'selection_statement : SWITCH LPAREN expression RPAREN statement '
     p[0] = ASTNode("switch_statement", [ p[3], p[5] ], p[1])
 
 
-def p_iteration_statement_1(t):
+def p_iteration_statement_1(p):
     'iteration_statement : WHILE LPAREN expression RPAREN statement'
     p[0] = ASTNode("while_statement", [ p[3], p[5] ], p[1])
 
-def p_iteration_statement_2(t):
+def p_iteration_statement_2(p):
     'iteration_statement : FOR LPAREN expression_opt SEMI expression_opt SEMI expression_opt RPAREN statement '
     p[0] = ASTNode("for_statement", [ p[3], p[5], p[7], p[9] ], p[1] )
 
-def p_iteration_statement_3(t):
+def p_iteration_statement_3(p):
     'iteration_statement : DO statement WHILE LPAREN expression RPAREN SEMI'
     p[0] = ASTNode("do_while_statement", [ p[2], p[5] ], p[1] )
 
@@ -317,22 +323,12 @@ def p_assignment_expression_2(p):
     p[0] = ASTNode("assignment_expression", [ p[1], p[3] ], p[2])
 
 def p_scan_expression_1(p):
-    'scan_expression : conditional_expression'
+    'scan_expression : logical_or_expression'
     p[0] = p[1]
 
 def p_scan_expression_2(p):
     'scan_expression : SCAN LPAREN RPAREN'
     p[0] = ASTNode("scan_expression", leaf=p[1])
-
-
-# (cond)?exp:exp;
-def p_conditional_expression_1(p):
-    'conditional_expression : logical_or_expression'
-    p[0] = p[1]
-
-def p_conditional_expression_2(p):
-    'conditional_expression : logical_or_expression COND_OP expression COLON conditional_expression '
-    p[0] = ASTNode("ternary_expression", [p[1], p[3], p[5]], p[2])
 
 def p_constant_expression_opt_1(p):
     'constant_expression_opt : empty'
@@ -343,7 +339,7 @@ def p_constant_expression_opt_2(p):
     p[0] = p[1]
 
 def p_constant_expression(p):
-    'constant_expression : conditional_expression'
+    'constant_expression : logical_or_expression'
     p[0] = p[1]
 
 def p_logical_or_expression_1(p):

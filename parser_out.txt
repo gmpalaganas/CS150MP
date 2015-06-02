@@ -45,28 +45,28 @@ Children:
 		AST Node "compound_statement":
 		Value: None
 		Children:
-			AST Node "declaration_list":
+			AST Node "mix_list":
 			Value: None
 			Children:
-				AST Node "declaration_list":
-				Value: None
+				AST Node "init_declarator":
+				Value: =
 				Children:
-					AST Node "init_declarator":
-					Value: =
+					AST Node "var_declarator":
+					Value: None
 					Children:
-						AST Node "var_declarator":
-						Value: None
-						Children:
-							AST Node "int_identifier":
-							Value: bilang_a
-							Children:
-								No Children
-
-						AST Node "int_constant":
-						Value: 0
+						AST Node "int_identifier":
+						Value: bilang_a
 						Children:
 							No Children
 
+					AST Node "int_constant":
+					Value: 0
+					Children:
+						No Children
+
+				AST Node "mix_list":
+				Value: None
+				Children:
 					AST Node "init_declarator":
 					Value: =
 					Children:
@@ -91,107 +91,7 @@ Children:
 								No Children
 
 
-
-				AST Node "init_declarator":
-				Value: =
-				Children:
-					AST Node "var_declarator":
-					Value: None
-					Children:
-						AST Node "float_identifier":
-						Value: tuldok_pi
-						Children:
-							No Children
-
-					AST Node "float_constant":
-					Value: 3.1415
-					Children:
-						No Children
-
-
-			AST Node "if_else_statement":
-			Value: kung
-			Children:
-				AST Node "logical_expression":
-				Value: &&
-				Children:
-					AST Node "relational_expression":
-					Value: <
-					Children:
-						AST Node "int_identifier":
-						Value: bilang_a
-						Children:
-							No Children
-						AST Node "int_constant":
-						Value: 3
-						Children:
-							No Children
-
-					AST Node "relational_expression":
-					Value: >
-					Children:
-						AST Node "int_identifier":
-						Value: bilang_a
-						Children:
-							No Children
-						AST Node "int_constant":
-						Value: 1
-						Children:
-							No Children
-
-
-				AST Node "compound_statement":
-				Value: None
-				Children:
-					AST Node "init_declarator":
-					Value: =
-					Children:
-						AST Node "var_declarator":
-						Value: None
-						Children:
-							AST Node "str_identifier":
-							Value: salita_s
-							Children:
-								No Children
-
-						AST Node "str_constant":
-						Value: Hello World
-						Children:
-							No Children
-
-					AST Node "print_expression":
-					Value: sulat
-					Children:
-						AST Node "str_identifier":
-						Value: salita_s
-						Children:
-							No Children
-
-
-				AST Node "if_else_statement":
-				Value: kung
-				Children:
-					AST Node "relational_expression":
-					Value: <
-					Children:
-						AST Node "int_identifier":
-						Value: bilang_a
-						Children:
-							No Children
-						AST Node "int_constant":
-						Value: 1
-						Children:
-							No Children
-
-					AST Node "print_expression":
-					Value: sulat
-					Children:
-						AST Node "str_constant":
-						Value: wala eh
-						Children:
-							No Children
-
-					AST Node "compound_statement":
+					AST Node "mix_list":
 					Value: None
 					Children:
 						AST Node "init_declarator":
@@ -200,23 +100,511 @@ Children:
 							AST Node "var_declarator":
 							Value: None
 							Children:
-								AST Node "str_identifier":
-								Value: salita_input
+								AST Node "float_identifier":
+								Value: tuldok_pi
 								Children:
 									No Children
 
-							AST Node "scan_expression":
-							Value: kuha
+							AST Node "float_constant":
+							Value: 3.1415
 							Children:
 								No Children
 
-						AST Node "print_expression":
-						Value: sulat
+						AST Node "mix_list":
+						Value: None
 						Children:
-							AST Node "str_identifier":
-							Value: salita_input
+							AST Node "if_else_statement":
+							Value: kung
 							Children:
-								No Children
+								AST Node "logical_expression":
+								Value: &&
+								Children:
+									AST Node "relational_expression":
+									Value: <
+									Children:
+										AST Node "int_identifier":
+										Value: bilang_a
+										Children:
+											No Children
+										AST Node "int_constant":
+										Value: 3
+										Children:
+											No Children
+
+									AST Node "relational_expression":
+									Value: >
+									Children:
+										AST Node "int_identifier":
+										Value: bilang_a
+										Children:
+											No Children
+										AST Node "int_constant":
+										Value: 1
+										Children:
+											No Children
+
+
+								AST Node "compound_statement":
+								Value: None
+								Children:
+									AST Node "mix_list":
+									Value: None
+									Children:
+										AST Node "init_declarator":
+										Value: =
+										Children:
+											AST Node "var_declarator":
+											Value: None
+											Children:
+												AST Node "str_identifier":
+												Value: salita_s
+												Children:
+													No Children
+
+											AST Node "str_constant":
+											Value: Hello World
+											Children:
+												No Children
+
+										AST Node "mix_list":
+										Value: None
+										Children:
+											AST Node "print_expression":
+											Value: sulat
+											Children:
+												AST Node "str_identifier":
+												Value: salita_s
+												Children:
+													No Children
+
+											AST Node "mix_list":
+											Value: None
+											Children:
+												AST Node "init_declarator":
+												Value: =
+												Children:
+													AST Node "var_declarator":
+													Value: None
+													Children:
+														AST Node "int_identifier":
+														Value: bilang_j
+														Children:
+															No Children
+
+													AST Node "int_constant":
+													Value: 0
+													Children:
+														No Children
+
+												AST Node "mix_list":
+												Value: None
+												Children:
+													AST Node "for_statement":
+													Value: tuwing
+													Children:
+														AST Node "int_identifier":
+														Value: bilang_j
+														Children:
+															No Children
+														AST Node "relational_expression":
+														Value: <
+														Children:
+															AST Node "int_identifier":
+															Value: bilang_j
+															Children:
+																No Children
+															AST Node "int_constant":
+															Value: 3
+															Children:
+																No Children
+
+														AST Node "postfix_expression":
+														Value: ++
+														Children:
+															AST Node "int_identifier":
+															Value: bilang_j
+															Children:
+																No Children
+
+														AST Node "compound_statement":
+														Value: None
+														Children:
+															AST Node "mix_list":
+															Value: None
+															Children:
+																AST Node "print_expression":
+																Value: sulat
+																Children:
+																	AST Node "int_identifier":
+																	Value: bilang_j
+																	Children:
+																		No Children
+
+																AST Node "mix_list":
+																Value: None
+																Children:
+																	AST Node "print_expression":
+																	Value: sulat
+																	Children:
+																		AST Node "str_constant":
+																		Value: \n
+																		Children:
+																			No Children
+
+
+
+
+
+
+
+
+
+
+								AST Node "if_else_statement":
+								Value: kung
+								Children:
+									AST Node "relational_expression":
+									Value: <
+									Children:
+										AST Node "int_identifier":
+										Value: bilang_a
+										Children:
+											No Children
+										AST Node "int_constant":
+										Value: 1
+										Children:
+											No Children
+
+									AST Node "print_expression":
+									Value: sulat
+									Children:
+										AST Node "str_constant":
+										Value: wala eh
+										Children:
+											No Children
+
+									AST Node "compound_statement":
+									Value: None
+									Children:
+										AST Node "mix_list":
+										Value: None
+										Children:
+											AST Node "init_declarator":
+											Value: =
+											Children:
+												AST Node "var_declarator":
+												Value: None
+												Children:
+													AST Node "str_identifier":
+													Value: salita_input
+													Children:
+														No Children
+
+												AST Node "scan_expression":
+												Value: kuha
+												Children:
+													No Children
+
+											AST Node "mix_list":
+											Value: None
+											Children:
+												AST Node "print_expression":
+												Value: sulat
+												Children:
+													AST Node "str_identifier":
+													Value: salita_input
+													Children:
+														No Children
+
+
+
+
+
+
+							AST Node "mix_list":
+							Value: None
+							Children:
+								AST Node "init_declarator":
+								Value: =
+								Children:
+									AST Node "var_declarator":
+									Value: None
+									Children:
+										AST Node "int_identifier":
+										Value: bilang_i
+										Children:
+											No Children
+
+									AST Node "int_constant":
+									Value: 0
+									Children:
+										No Children
+
+								AST Node "mix_list":
+								Value: None
+								Children:
+									AST Node "while_statement":
+									Value: habang
+									Children:
+										AST Node "relational_expression":
+										Value: >
+										Children:
+											AST Node "int_identifier":
+											Value: bilang_i
+											Children:
+												No Children
+											AST Node "int_constant":
+											Value: 10
+											Children:
+												No Children
+
+										AST Node "compound_statement":
+										Value: None
+										Children:
+											AST Node "mix_list":
+											Value: None
+											Children:
+												AST Node "print_expression":
+												Value: sulat
+												Children:
+													AST Node "int_identifier":
+													Value: bilang_i
+													Children:
+														No Children
+
+												AST Node "mix_list":
+												Value: None
+												Children:
+													AST Node "print_expression":
+													Value: sulat
+													Children:
+														AST Node "str_constant":
+														Value: \n
+														Children:
+															No Children
+
+													AST Node "mix_list":
+													Value: None
+													Children:
+														AST Node "postfix_expression":
+														Value: ++
+														Children:
+															AST Node "int_identifier":
+															Value: bilang_i
+															Children:
+																No Children
+
+
+
+
+
+
+									AST Node "mix_list":
+									Value: None
+									Children:
+										AST Node "init_declarator":
+										Value: =
+										Children:
+											AST Node "declarator":
+											Value: None
+											Children:
+												AST Node "var_declarator":
+												Value: None
+												Children:
+													AST Node "int_identifier":
+													Value: bilang_arr
+													Children:
+														No Children
+
+												AST Node "int_constant":
+												Value: 3
+												Children:
+													No Children
+
+											AST Node "array_initializer_list":
+											Value: None
+											Children:
+												AST Node "initializer_list":
+												Value: None
+												Children:
+													AST Node "initializer_list":
+													Value: None
+													Children:
+														AST Node "initializer_list":
+														Value: None
+														Children:
+															AST Node "int_constant":
+															Value: 1
+															Children:
+																No Children
+
+														AST Node "int_constant":
+														Value: 2
+														Children:
+															No Children
+
+													AST Node "int_constant":
+													Value: 3
+													Children:
+														No Children
+
+
+
+										AST Node "mix_list":
+										Value: None
+										Children:
+											AST Node "for_statement":
+											Value: tuwing
+											Children:
+												AST Node "assignment_expression":
+												Value: =
+												Children:
+													AST Node "int_identifier":
+													Value: bilang_i
+													Children:
+														No Children
+													AST Node "int_constant":
+													Value: 0
+													Children:
+														No Children
+
+												AST Node "relational_expression":
+												Value: <
+												Children:
+													AST Node "int_identifier":
+													Value: bilang_i
+													Children:
+														No Children
+													AST Node "int_constant":
+													Value: 3
+													Children:
+														No Children
+
+												AST Node "postfix_expression":
+												Value: ++
+												Children:
+													AST Node "int_identifier":
+													Value: bilang_i
+													Children:
+														No Children
+
+												AST Node "print_expression":
+												Value: sulat
+												Children:
+													AST Node "array":
+													Value: None
+													Children:
+														AST Node "int_identifier":
+														Value: bilang_arr
+														Children:
+															No Children
+														AST Node "int_identifier":
+														Value: bilang_i
+														Children:
+															No Children
+
+
+
+											AST Node "mix_list":
+											Value: None
+											Children:
+												AST Node "assignment_expression":
+												Value: =
+												Children:
+													AST Node "int_identifier":
+													Value: bilang_i
+													Children:
+														No Children
+													AST Node "int_constant":
+													Value: 0
+													Children:
+														No Children
+
+												AST Node "mix_list":
+												Value: None
+												Children:
+													AST Node "do_while_statement":
+													Value: gawin
+													Children:
+														AST Node "compound_statement":
+														Value: None
+														Children:
+															AST Node "mix_list":
+															Value: None
+															Children:
+																AST Node "print_expression":
+																Value: sulat
+																Children:
+																	AST Node "int_identifier":
+																	Value: bilang_i
+																	Children:
+																		No Children
+
+																AST Node "mix_list":
+																Value: None
+																Children:
+																	AST Node "print_expression":
+																	Value: sulat
+																	Children:
+																		AST Node "str_constant":
+																		Value: \n
+																		Children:
+																			No Children
+
+																	AST Node "mix_list":
+																	Value: None
+																	Children:
+																		AST Node "postfix_expression":
+																		Value: ++
+																		Children:
+																			AST Node "int_identifier":
+																			Value: bilang_i
+																			Children:
+																				No Children
+
+
+
+
+
+														AST Node "relational_expression":
+														Value: >
+														Children:
+															AST Node "int_identifier":
+															Value: bilang_i
+															Children:
+																No Children
+															AST Node "int_constant":
+															Value: 10
+															Children:
+																No Children
+
+
+													AST Node "mix_list":
+													Value: None
+													Children:
+														AST Node "init_declarator":
+														Value: =
+														Children:
+															AST Node "var_declarator":
+															Value: None
+															Children:
+																AST Node "char_identifier":
+																Value: letra_hello
+																Children:
+																	No Children
+
+															AST Node "char_constant":
+															Value: a
+															Children:
+																No Children
+
+
+
+
+
+
+
+
 
 
 
