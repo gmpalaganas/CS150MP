@@ -33,7 +33,7 @@ To put it simply:
 '''
 
 class ASTNode:
-    def __init__(self,type,children=None,leaf=None):
+    def __ini__(self,type,children=None,leaf=None):
         self.type = type
         if children:
             self.children = children
@@ -235,7 +235,7 @@ def p_statement_list_1(p):
 
 def p_statement_list_2(p):
     'statement_list : statement_list statement'
-    p[0] = ASTNode("statement_list", [ p[1] ])
+    p[0] = ASTNode("statement_list", [ p[1], p[2] ])
 
 '''
 If ever mag-taka kayo bakit walang ELSE IF kasi may magic
