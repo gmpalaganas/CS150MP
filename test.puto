@@ -20,7 +20,7 @@ bilang_puno(){
     ~
     kung ( bilang_a < 3 && bilang_a > 1 ){
 
-        @salita_s = "Hello World";
+        @salita_s = kuha();
 
         sulat(salita_s);
         #This here is a nested compound statement

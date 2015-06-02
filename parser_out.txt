@@ -159,8 +159,8 @@ Children:
 												Children:
 													No Children
 
-											AST Node "str_constant":
-											Value: Hello World
+											AST Node "scan_expression":
+											Value: kuha
 											Children:
 												No Children
 
