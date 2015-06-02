@@ -17,7 +17,7 @@ To put it simply:
           -> this will define what you will do with the node
     >children -> you can think of this as the parameters of the node
               -> basically you have to evaluate (depending on the node type) these first to be able to evaluate this node
-    >leaf -> this contains the "operation" to be done in this node
+    >value -> this contains the "operation" to be done in this node
           -> Examples:
             ASTNode("print_statement", ASTNode("constant","Hello World") , "sulat") == sulat("Hello World")
 
@@ -33,13 +33,13 @@ To put it simply:
 '''
 
 class ASTNode:
-    def __init__(self,type,children=None,leaf=None):
+    def __init__(self,type,children=None,value=None):
         self.type = type
         if children:
             self.children = children
         else:
             self.children = [ ]
-        self.leaf = leaf
+        self.value = value 
 
     def toString(self,prefix=0):
         
@@ -49,7 +49,7 @@ class ASTNode:
             msg += (prefix - 1) * "\t"
 
         msg = "AST Node \"%s\":\n" % self.type
-        msg += prefix * "\t" + "Value: %s\n" % self.leaf 
+        msg += prefix * "\t" + "Value: %s\n" % self.value 
         msg +=  prefix * "\t" +"Children:\n"
             
         if len(self.children) == 0:
@@ -277,7 +277,7 @@ def p_jump_statement_1(p):
     jump_statement : CONTINUE SEMI
                    | BREAK SEMI
     '''
-    p[0] = ASTNode("jump_statement", leaf=p[1])
+    p[0] = ASTNode("jump_statement", value=p[1])
 
 def p_jump_statement_3(p):
     'jump_statement : RETURN expression_opt SEMI'
@@ -328,7 +328,7 @@ def p_scan_expression_1(p):
 
 def p_scan_expression_2(p):
     'scan_expression : SCAN LPAREN RPAREN'
-    p[0] = ASTNode("scan_expression", leaf=p[1])
+    p[0] = ASTNode("scan_expression", value=p[1])
 
 def p_constant_expression_opt_1(p):
     'constant_expression_opt : empty'
@@ -469,35 +469,35 @@ def p_argument_expression_list_2(p):
 
 def p_identifier_1(p):
     'identifier : FLOAT_ID '
-    p[0] = ASTNode("float_identifier", leaf =  p[1] )
+    p[0] = ASTNode("float_identifier", value =  p[1] )
     
 def p_identifier_2(p):
     'identifier : INT_ID'
-    p[0] = ASTNode("int_identifier", leaf =  p[1] )
+    p[0] = ASTNode("int_identifier", value =  p[1] )
 
 def p_identifier_3(p):
     'identifier : CHAR_ID'
-    p[0] = ASTNode("char_identifier", leaf =  p[1] )
+    p[0] = ASTNode("char_identifier", value =  p[1] )
 
 def p_identifier_4(p):
     'identifier : STR_ID'
-    p[0] = ASTNode("str_identifier", leaf =  p[1] )
+    p[0] = ASTNode("str_identifier", value =  p[1] )
 
 def p_constant(p):
     'constant : FLOAT_LIT'
-    p[0] = ASTNode("float_constant",  leaf = p[1] ) 
+    p[0] = ASTNode("float_constant",  value = p[1] ) 
 
 def p_constant_2(p):
     'constant : INT_LIT'
-    p[0] = ASTNode("int_constant",  leaf = p[1] ) 
+    p[0] = ASTNode("int_constant",  value = p[1] ) 
 
 def p_constant_3(p):
     'constant : CHAR_LIT'
-    p[0] = ASTNode("char_constant",  leaf = p[1] ) 
+    p[0] = ASTNode("char_constant",  value = p[1] ) 
 
 def p_constant_4(p):
     'constant : STR_LIT'
-    p[0] = ASTNode("str_constant",  leaf = p[1] ) 
+    p[0] = ASTNode("str_constant",  value = p[1] ) 
 
 def p_empty(p):
     'empty : '

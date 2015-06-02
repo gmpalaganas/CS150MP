@@ -1,0 +1,3 @@
+bilang_puno(){
+    sulat("Hello World");
+}

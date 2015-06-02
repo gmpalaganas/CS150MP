@@ -1,0 +1,33 @@
+AST Node "start":
+Value: None
+Children:
+	AST Node "empty":
+	Value: None
+	Children:
+		No Children
+	AST Node "main":
+	Value: bilang_puno
+	Children:
+		AST Node "compound_statement":
+		Value: None
+		Children:
+			AST Node "mix_list":
+			Value: None
+			Children:
+				AST Node "print_expression":
+				Value: sulat
+				Children:
+					AST Node "str_constant":
+					Value: Hello World
+					Children:
+						No Children
+
+
+
+
+	AST Node "empty":
+	Value: None
+	Children:
+		No Children
+
+
