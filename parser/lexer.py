@@ -91,7 +91,7 @@ t_GE 			= r'>='
 t_LT 			= r'<'
 t_LE 			= r'<='
 
-t_ADD_ASSIGN            = r'\+='
+t_ADD_ASSIGN            = r' \+= '
 t_MIN_ASSIGN            = r'-='
 t_MUL_ASSIGN            = r'\*='
 t_DIV_ASSIGN            = r'/='

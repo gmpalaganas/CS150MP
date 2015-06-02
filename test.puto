@@ -38,7 +38,7 @@ bilang_puno(){
     }
     
     @bilang_i = 0;
-    habang(bilang_i > 10){
+    habang(bilang_i < 10){
         sulat(bilang_i);
         sulat("\n");
         bilang_i++;
@@ -53,8 +53,8 @@ bilang_puno(){
     gawin{
         sulat(bilang_i);
         sulat("\n");
-        bilang_i++;
-    }habang(bilang_i > 10);
+        bilang_i += 2;
+    }habang(bilang_i < 10);
 
     @letra_hello = 'a';
     

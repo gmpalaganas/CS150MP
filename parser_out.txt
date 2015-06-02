@@ -345,7 +345,7 @@ Children:
 									Value: habang
 									Children:
 										AST Node "relational_expression":
-										Value: >
+										Value: <
 										Children:
 											AST Node "int_identifier":
 											Value: bilang_i
@@ -552,11 +552,15 @@ Children:
 																	AST Node "mix_list":
 																	Value: None
 																	Children:
-																		AST Node "postfix_expression":
-																		Value: ++
+																		AST Node "assignment_expression":
+																		Value: +=
 																		Children:
 																			AST Node "int_identifier":
 																			Value: bilang_i
+																			Children:
+																				No Children
+																			AST Node "int_constant":
+																			Value: 2
 																			Children:
 																				No Children
 
@@ -565,7 +569,7 @@ Children:
 
 
 														AST Node "relational_expression":
-														Value: >
+														Value: <
 														Children:
 															AST Node "int_identifier":
 															Value: bilang_i
