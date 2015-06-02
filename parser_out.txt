@@ -1,0 +1,135 @@
+Comment
+Comment
+AST Node "start":
+	Value: None
+	Children:
+		AST Node "external_declaration":
+		Value: None
+		Children:
+			AST Node "fxn_prototype":
+		Value: None
+		Children:
+			AST Node "fxn_declaration":
+		Value: @
+		Children:
+			AST Node "identifier":
+		Value: bilang_add
+		Children:
+			No Children
+			AST Node "fxn_args":
+		Value: ,
+		Children:
+			AST Node "identifier":
+		Value: bilang_a
+		Children:
+			No Children
+			AST Node "fxn_args":
+		Value: None
+		Children:
+			AST Node "identifier":
+		Value: bilang_b
+		Children:
+			No Children
+
+
+
+
+			AST Node "empty":
+		Value: None
+		Children:
+			No Children
+
+		AST Node "main":
+		Value: bilang_puno
+		Children:
+			AST Node "compound_statement":
+		Value: None
+		Children:
+			AST Node "declaration_list":
+		Value: None
+		Children:
+			AST Node "init_declarator":
+		Value: =
+		Children:
+			AST Node "var_declarator":
+		Value: @
+		Children:
+		bilang_a
+			AST Node "constant":
+		Value: None
+		Children:
+			No Children
+
+			AST Node "init_declarator":
+		Value: =
+		Children:
+			AST Node "var_declarator":
+		Value: @
+		Children:
+		bilang_k
+			AST Node "binary_expression":
+		Value: +
+		Children:
+			AST Node "constant":
+		Value: 5
+		Children:
+			No Children
+			AST Node "constant":
+		Value: 3
+		Children:
+			No Children
+
+
+
+			AST Node "if_else_statement":
+		Value: kung
+		Children:
+			AST Node "logical_expression":
+		Value: &&
+		Children:
+			AST Node "relational_expression":
+		Value: <
+		Children:
+			AST Node "identifier":
+		Value: bilang_a
+		Children:
+			No Children
+			AST Node "constant":
+		Value: 3
+		Children:
+			No Children
+
+			AST Node "relational_expression":
+		Value: >
+		Children:
+			AST Node "identifier":
+		Value: bilang_a
+		Children:
+			No Children
+			AST Node "constant":
+		Value: 1
+		Children:
+			No Children
+
+
+			AST Node "init_declarator":
+		Value: =
+		Children:
+			AST Node "var_declarator":
+		Value: @
+		Children:
+		salita_s
+			AST Node "constant":
+		Value: Hello World
+		Children:
+			No Children
+
+
+
+
+		AST Node "empty":
+		Value: None
+		Children:
+			No Children
+
+

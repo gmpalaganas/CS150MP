@@ -8,7 +8,6 @@ reserved = {
 	'tuloy'			:	'CONTINUE',
 	'kung'			:	'IF',
         'iba'                   :       'ELSE',
-	'ediKung'		:	'ELSE_IF',
 	'palit'			:	'SWITCH',
 	'kaso'			:	'CASE',
 	'walangKaso'	        :	'DEFAULT',
