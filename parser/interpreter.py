@@ -12,7 +12,6 @@ class SymbolTableScope:
         self.symbols = {}
 
     def getSymbol(self,symbol):
-        symbol = symbol.strip()
         if self.symbols.has_key(symbol):
             return self.symbols[symbol]
         else:
@@ -108,20 +107,7 @@ def interpret(ast):
     elif ast.type == "init_declarator":
         symbol = interpret(ast.children[0])
         value = interpret(ast.children[1])
-        if ast.value == "=":
-            symbolTable.updateSymbol(symbol,ast.children[0].children[0].type,value)
-        elif ast.value == "+=":
-            val = symbolTable.lookupSymbol(symbol) + value
-            symbolTable.updateSymbol(symbol,ast.children[0].children[0].type,val)
-        elif ast.value == "-=":
-            val = symbolTable.lookupSymbol(symbol) - value
-            symbolTable.updateSymbol(symbol,ast.children[0].children[0].type,val)
-        elif ast.value == "*=":
-            val = symbolTable.lookupSymbol(symbol) * value
-            symbolTable.updateSymbol(symbol,ast.children[0].children[0].type,val)
-        elif ast.value == "/=":
-            val = symbolTable.lookupSymbol(symbol) / value
-            symbolTable.updateSymbol(symbol,ast.children[0].children[0].type,val)
+        symbolTable.updateSymbol(symbol,ast.children[0].children[0].type,value)
     elif ast.type == "var_declarator":
         symbol = interpret(ast.children[0])
         symbolTable.declareSymbol(symbol,ast.children[0].type)
