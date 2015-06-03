@@ -4,6 +4,7 @@ from parser.parser import runParser
 import sys
 
 def main():
+    #print runParser(sys.argv[1])
     ast = runParser(sys.argv[1])
     interpret(ast) 
 

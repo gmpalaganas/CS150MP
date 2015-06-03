@@ -98,12 +98,12 @@ Children:
 							AST Node "var_declarator":
 							Value: None
 							Children:
-								AST Node "float_identifier":
+								AST Node "flt_identifier":
 								Value: tuldok_pi
 								Children:
 									No Children
 
-							AST Node "float_constant":
+							AST Node "flt_constant":
 							Value: 3.1415
 							Children:
 								No Children
@@ -590,12 +590,12 @@ Children:
 															AST Node "var_declarator":
 															Value: None
 															Children:
-																AST Node "char_identifier":
+																AST Node "chr_identifier":
 																Value: letra_hello
 																Children:
 																	No Children
 
-															AST Node "char_constant":
+															AST Node "chr_constant":
 															Value: a
 															Children:
 																No Children

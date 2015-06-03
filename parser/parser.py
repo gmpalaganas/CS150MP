@@ -304,7 +304,7 @@ def p_print_expression_1(p):
     p[0] = p[1]
 
 def p_print_expression_2(p):
-    'print_expression : PRINT LPAREN logical_or_expression RPAREN'
+    'print_expression : PRINT LPAREN scan_expression RPAREN'
     p[0] = ASTNode("print_expression", [ p[3] ], p[1])
 
 def p_assignment_expression_1(p):
@@ -448,7 +448,7 @@ def p_postfix_expression_5(p):
 
 def p_primary_expression_1(p):
     'primary_expression : identifier'
-    p[0] = p[1]
+    p[0] = ASTNode("variable_call", [ p[1] ]) 
 
 def p_primary_expression_2(p):
     'primary_expression : constant'
@@ -469,7 +469,7 @@ def p_argument_expression_list_2(p):
 
 def p_identifier_1(p):
     'identifier : FLOAT_ID '
-    p[0] = ASTNode("float_identifier", value =  p[1] )
+    p[0] = ASTNode("flt_identifier", value =  p[1] )
     
 def p_identifier_2(p):
     'identifier : INT_ID'
@@ -477,7 +477,7 @@ def p_identifier_2(p):
 
 def p_identifier_3(p):
     'identifier : CHAR_ID'
-    p[0] = ASTNode("char_identifier", value =  p[1] )
+    p[0] = ASTNode("chr_identifier", value =  p[1] )
 
 def p_identifier_4(p):
     'identifier : STR_ID'
@@ -485,7 +485,7 @@ def p_identifier_4(p):
 
 def p_constant(p):
     'constant : FLOAT_LIT'
-    p[0] = ASTNode("float_constant",  value = p[1] ) 
+    p[0] = ASTNode("flt_constant",  value = p[1] ) 
 
 def p_constant_2(p):
     'constant : INT_LIT'
@@ -493,7 +493,7 @@ def p_constant_2(p):
 
 def p_constant_3(p):
     'constant : CHAR_LIT'
-    p[0] = ASTNode("char_constant",  value = p[1] ) 
+    p[0] = ASTNode("chr_constant",  value = p[1] ) 
 
 def p_constant_4(p):
     'constant : STR_LIT'

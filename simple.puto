@@ -1,3 +1,19 @@
 bilang_puno(){
+    sulat(5 + 3);
     sulat("Hello World");
+    sulat( (5 + 3) / 2);
+    sulat( 20.0 / 12.5 );
+    sulat( 'c' );
+    sulat( "Anong pangalan mo?" );
+    @salita_s = kuha();
+    @bilang_x;
+    sulat( salita_s );
+
+    {
+        @bilang_k = 2;
+        sulat(bilang_k);
+
+    }
+
+    sulat(bilang_k);
 }

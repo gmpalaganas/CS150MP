@@ -17,10 +17,146 @@ Children:
 				AST Node "print_expression":
 				Value: sulat
 				Children:
-					AST Node "str_constant":
-					Value: Hello World
+					AST Node "binary_expression":
+					Value: +
 					Children:
-						No Children
+						AST Node "int_constant":
+						Value: 5
+						Children:
+							No Children
+						AST Node "int_constant":
+						Value: 3
+						Children:
+							No Children
+
+
+				AST Node "mix_list":
+				Value: None
+				Children:
+					AST Node "print_expression":
+					Value: sulat
+					Children:
+						AST Node "str_constant":
+						Value: Hello World
+						Children:
+							No Children
+
+					AST Node "mix_list":
+					Value: None
+					Children:
+						AST Node "print_expression":
+						Value: sulat
+						Children:
+							AST Node "binary_expression":
+							Value: /
+							Children:
+								AST Node "binary_expression":
+								Value: +
+								Children:
+									AST Node "int_constant":
+									Value: 5
+									Children:
+										No Children
+									AST Node "int_constant":
+									Value: 3
+									Children:
+										No Children
+
+								AST Node "int_constant":
+								Value: 2
+								Children:
+									No Children
+
+
+						AST Node "mix_list":
+						Value: None
+						Children:
+							AST Node "print_expression":
+							Value: sulat
+							Children:
+								AST Node "binary_expression":
+								Value: /
+								Children:
+									AST Node "float_constant":
+									Value: 20.0
+									Children:
+										No Children
+									AST Node "float_constant":
+									Value: 12.5
+									Children:
+										No Children
+
+
+							AST Node "mix_list":
+							Value: None
+							Children:
+								AST Node "print_expression":
+								Value: sulat
+								Children:
+									AST Node "char_constant":
+									Value: c
+									Children:
+										No Children
+
+								AST Node "mix_list":
+								Value: None
+								Children:
+									AST Node "print_expression":
+									Value: sulat
+									Children:
+										AST Node "str_constant":
+										Value: Anong pangalan mo?
+										Children:
+											No Children
+
+									AST Node "mix_list":
+									Value: None
+									Children:
+										AST Node "init_declarator":
+										Value: =
+										Children:
+											AST Node "var_declarator":
+											Value: None
+											Children:
+												AST Node "str_identifier":
+												Value: salita_s
+												Children:
+													No Children
+
+											AST Node "scan_expression":
+											Value: kuha
+											Children:
+												No Children
+
+										AST Node "mix_list":
+										Value: None
+										Children:
+											AST Node "var_declarator":
+											Value: None
+											Children:
+												AST Node "int_identifier":
+												Value: bilang_x
+												Children:
+													No Children
+
+											AST Node "mix_list":
+											Value: None
+											Children:
+												AST Node "print_expression":
+												Value: sulat
+												Children:
+													AST Node "str_identifier":
+													Value: salita_s
+													Children:
+														No Children
+
+
+
+
+
+
+
+
 
 
 
