@@ -21,6 +21,7 @@ class SymbolTableScope:
 class SymbolTable:
     
     defaults = { STR : ' ', INT : 0, FLT : 0.0, CHR : '\0' }
+    types = { STR: 'string', INT : 'int', FLT : 'float', CHR : 'char' }
 
     def __init__(self):
         self.globalScope = SymbolTableScope()
@@ -41,7 +42,6 @@ class SymbolTable:
            i_error("Variable %s already exists" % symbol) 
         
         set_val = self.defaults[s_type] 
-        
         if value:
             try:
                 if(s_type == STR): 
@@ -53,7 +53,7 @@ class SymbolTable:
                 elif(s_type == FLT):
                     set_val = float(value)
             except ValueError:
-               i_error(" Incompatible value" , value , " to variable %s " % symbol)
+               i_error("%s expects %s but '%s' is of type %s " % (symbol, self.types[s_type], str(value), type(value)))
        
         scope.symbols[symbol] = set_val
 
@@ -78,23 +78,20 @@ class SymbolTable:
             if not lookupScope:
                 i_error("Variable %s does not exist within scope" % symbol)
             val = lookupScope.getSymbol(symbol)
-        
-        try:
-            set_val = None
-            if(s_type == STR): 
-                set_val = str(value) 
-            elif(s_type == CHR):
-                set_val = str(value)[1:len(str(value)) - 1]
-            elif(s_type == INT):
-                set_val = int(value)
-            elif(s_type == FLT):
-                set_val = float(value)
-            
-            lookupScope.symbols[symbol] = set_val
-        except ValueError:
-            msg = "Incompatible value to variable " + symbol 
-            i_error(msg)
 
+        if value:
+            try:
+                if(s_type == STR): 
+                    set_val = str(value) 
+                elif(s_type == CHR):
+                    set_val = str(value)[1:len(str(value)) - 1]
+                elif(s_type == INT):
+                    set_val = int(value)
+                elif(s_type == FLT):
+                    set_val = float(value)
+            except ValueError:
+               i_error("%s expects %s but '%s' is of type %s " % (symbol, self.types[s_type], str(value), type(value)))
+       
 symbolTable = SymbolTable() 
 
 def interpret(ast):
