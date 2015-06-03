@@ -15,6 +15,7 @@ reserved = {
 	'gawin'			:	'DO',
 	'habang'		:	'WHILE',
 	'sulat'			:	'PRINT',
+	'sulatln'		:	'PRINTLN',
 	'kuha'			:	'SCAN',
 }
 tokens = [

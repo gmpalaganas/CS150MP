@@ -307,6 +307,10 @@ def p_print_expression_2(p):
     'print_expression : PRINT LPAREN scan_expression RPAREN'
     p[0] = ASTNode("print_expression", [ p[3] ], p[1])
 
+def p_print_expression_3(p):
+    'print_expression : PRINTLN LPAREN scan_expression RPAREN'
+    p[0] = ASTNode("println_expression", [ p[3] ], p[1])
+
 def p_assignment_expression_1(p):
     'assignment_expression : scan_expression'
     p[0] = p[1]

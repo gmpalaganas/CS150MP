@@ -1,19 +1,25 @@
 bilang_puno(){
-    sulat(5 + 3);
-    sulat("Hello World");
-    sulat( (5 + 3) / 2);
-    sulat( 20.0 / 12.5 );
-    sulat( 'c' );
+    sulatln(5 + 3);
+    sulatln("Hello World");
+    sulatln( (5 + 3) / 2);
+    sulatln( 20.0 / 12.5 );
+    sulatln( 'c' );
+    
     sulat( "Anong pangalan mo?" );
     @salita_s = kuha();
-    @bilang_x;
-    sulat( salita_s );
+    sulatln( "Kamusta ka " + salita_s + "?");
+
+    sulat( "Input a:" );
+    @bilang_x = kuha();
+    sulat( "Input b:" );
+    @bilang_y = kuha();
+    sulat( "Ang sagot ay ");
+    sulatln(  bilang_x + bilang_y );
 
     {
         @bilang_k = 2;
-        sulat(bilang_k);
+        sulatln(bilang_k);
 
     }
 
-    sulat(bilang_k);
 }

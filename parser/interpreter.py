@@ -1,4 +1,5 @@
 import parser
+import sys
 
 STR = "str_identifier"
 INT = "int_identifier"
@@ -91,7 +92,8 @@ class SymbolTable:
             
             lookupScope.symbols[symbol] = set_val
         except ValueError:
-            i_error(" Incompatible value" , value , " to variable %s " % symbol)
+            msg = "Incompatible value to variable " + symbol 
+            i_error(msg)
 
 symbolTable = SymbolTable() 
 
@@ -136,9 +138,13 @@ def interpret(ast):
         for child in ast.children:
             interpret(child)
         return None
+    elif ast.type == "println_expression":
+        msg = interpret(ast.children[0])
+        print(msg)
+        return None
     elif ast.type == "print_expression":
         msg = interpret(ast.children[0])
-        print msg
+        print(msg),
         return None
     elif ast.type == "scan_expression":
         return raw_input();
