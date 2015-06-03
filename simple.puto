@@ -1,3 +1,8 @@
+~
+    AHMAHGAWD! GUMAGANA SYA! ASKHAJSKASKA
+    AJSKLAJSLALSKLAJSLAKJSLA
+~
+
 bilang_puno(){
     sulatln(5 + 3);
     sulatln("Hello World");
@@ -15,7 +20,8 @@ bilang_puno(){
     @bilang_y = kuha();
     sulat( "Ang sagot ay ");
     sulatln(  bilang_x + bilang_y );
-
+    
+    #Test for scoping, try calling bilan_k outside this block
     {
         @bilang_k = 2;
         sulatln(bilang_k);
