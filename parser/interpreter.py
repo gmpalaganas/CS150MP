@@ -91,6 +91,7 @@ class SymbolTable:
                     set_val = float(value)
             except ValueError:
                i_error("%s expects %s but '%s' is of type %s " % (symbol, self.types[s_type], str(value), type(value)))
+        lookupScope.symbols[symbol] = set_val
        
 symbolTable = SymbolTable() 
 

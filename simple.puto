@@ -24,6 +24,7 @@ bilang_puno(){
     #Test for scoping, try calling bilan_k outside this block
     {
         @bilang_k = 2;
+        bilang_k += 305;
         sulatln(bilang_k);
 
     }
