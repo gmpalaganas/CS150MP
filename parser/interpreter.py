@@ -18,7 +18,6 @@ class SymbolTableScope:
             return None
 
 class SymbolTable:
-    
     defaults = { STR : ' ', INT : 0, FLT : 0.0, CHR : '\0' }
     types = { STR: 'string', INT : 'int', FLT : 'float', CHR : 'char' }
 
@@ -36,15 +35,15 @@ class SymbolTable:
 
     def declareSymbol(self,symbol,s_type,value=None):
         scope = self.curScope
-   
+
         if scope.symbols.has_key(symbol):
-           i_error("Variable %s already exists" % symbol) 
-        
-        set_val = self.defaults[s_type] 
+           i_error("Variable %s already exists" % symbol)
+
+        set_val = self.defaults[s_type]
         if value:
             try:
-                if(s_type == STR): 
-                    set_val = str(value) 
+                if(s_type == STR):
+                    set_val = str(value)
                 elif(s_type == CHR):
                     set_val = str(value)[1:len(str(value)) - 1]
                 elif(s_type == INT):
@@ -53,7 +52,7 @@ class SymbolTable:
                     set_val = float(value)
             except ValueError:
                i_error("%s expects %s but '%s' is of type %s " % (symbol, self.types[s_type], str(value), type(value)))
-       
+
         scope.symbols[symbol] = set_val
 
     def lookupSymbol(self,symbol):
@@ -65,25 +64,25 @@ class SymbolTable:
             if lookupScope == None:
                 i_error("Variable %s does not exist within scope" % symbol)
             val = lookupScope.getSymbol(symbol)
-        
+
         return val
 
     def updateSymbol(self,symbol,s_type,value):
         lookupScope = self.curScope
-        val = lookupScope.getSymbol(symbol) 
+        val = lookupScope.getSymbol(symbol)
 
         while not lookupScope.symbols.has_key(symbol):
             lookupScope = lookupScope.parent
             if lookupScope == None:
                 i_error("Variable %s does not exist within scope" % symbol)
             val = lookupScope.getSymbol(symbol)
-        
+
 
         set_val = None
         if value != None:
             try:
-                if(s_type == STR): 
-                    set_val = str(value) 
+                if(s_type == STR):
+                    set_val = str(value)
                 elif(s_type == CHR):
                     set_val = str(value)[1:len(str(value)) - 1]
                 elif(s_type == INT):
@@ -93,7 +92,7 @@ class SymbolTable:
             except ValueError:
                i_error("%s expects %s but '%s' is of type %s " % (symbol, self.types[s_type], str(value), type(value)))
         lookupScope.symbols[symbol] = set_val
-    
+
     #finds number of elements in ast.children[x] node
 def childTot(child):
     tot = 0
@@ -101,7 +100,7 @@ def childTot(child):
         tot = tot + 1
     return tot
 
-symbolTable = SymbolTable() 
+symbolTable = SymbolTable()
 
 def interpret(ast,extraParam=None):
     if ast.type == "start":
@@ -132,7 +131,7 @@ def interpret(ast,extraParam=None):
             ret = interpret(child,extraParam)
             if ret == "break" or ret == "continue":
                 return ret
-        return None  
+        return None
     elif ast.type == "println_expression":
         msg = interpret(ast.children[0])
         print(msg)
@@ -204,13 +203,12 @@ def interpret(ast,extraParam=None):
         elif op == "%=":
             symbolTable.updateSymbol(variable, var_type, val % val2)
         return variable
-        
     elif ast.type == "str_constant":
         return ast.value
     elif ast.type == "int_constant":
         return ast.value
     elif ast.type == "flt_constant":
-        return ast.value    
+        return ast.value
     elif ast.type == "chr_constant":
         return ast.value
     elif ast.type == "str_identifier":
@@ -218,7 +216,7 @@ def interpret(ast,extraParam=None):
     elif ast.type == "int_identifier":
         return ast.value
     elif ast.type == "flt_identifier":
-        return ast.value   
+        return ast.value
     elif ast.type == "chr_identifier":
         return ast.value
     elif ast.type == "relational_expression":
@@ -252,7 +250,7 @@ def interpret(ast,extraParam=None):
     elif ast.type == "case_statement":
         varSw = extraParam
         val = interpret(ast.children[0])
-        if symbolTable.lookupSymbol(varSw) == val:              
+        if symbolTable.lookupSymbol(varSw) == val:
             return interpret(ast.children[1])
     elif ast.type == "default_statement":
         interpret(ast.children[0])
