@@ -55,10 +55,12 @@ bilang_puno(){
     palit(bilang_sum){
         kaso 5:{
             sulatln("LIMA");
-        }putol;
+            putol;
+        }
         kaso 10:{
             sulatln("SAMPU");
-        }putol;
+            putol;
+        }
         walangKaso:
             sulatln("EWAN");
     }
