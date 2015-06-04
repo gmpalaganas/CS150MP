@@ -109,9 +109,7 @@ def interpret(ast,extraParam=None):
             interpret(child)
         return None
     elif ast.type == "main":
-        symbolTable.pushScope()
         interpret(ast.children[0])
-        symbolTable.popScope()
         return None
     elif ast.type == "init_declarator":
         symbol = interpret(ast.children[0])
@@ -124,12 +122,16 @@ def interpret(ast,extraParam=None):
     elif ast.type == "compound_statement":
         symbolTable.pushScope()
         for child in ast.children:
-            interpret(child,extraParam)
+            ret = interpret(child,extraParam)
+            if ret == "break" or ret == "continue":
+                return ret
         symbolTable.popScope()
         return None
     elif ast.type == "mix_list":
         for child in ast.children:
-            interpret(child,extraParam)
+            ret = interpret(child,extraParam)
+            if ret == "break" or ret == "continue":
+                return ret
         return None  
     elif ast.type == "println_expression":
         msg = interpret(ast.children[0])
@@ -244,50 +246,59 @@ def interpret(ast,extraParam=None):
             return val1 == val2
         elif ast.value == "!=":
             return val1 != val2
-    #this switch_statement block is not checked yet
     elif ast.type == "switch_statement":
         varSw = ast.children[0].children[0].value
-        interpret(ast.children[1],varSw)
-    #this labeled_statement block is not checked yet
+        ret = interpret(ast.children[1],varSw)
     elif ast.type == "case_statement":
         varSw = extraParam
         val = interpret(ast.children[0])
-        if symbolTable.lookupSymbol(varSw) == val:  #i assumed that constant_expression is a constant and not an expression
-            interpret(ast.children[1])
-    #this default_statement block is not checked yet
+        if symbolTable.lookupSymbol(varSw) == val:              
+            return interpret(ast.children[1])
     elif ast.type == "default_statement":
         interpret(ast.children[0])
-    #this if_else_statement is not checked yet
     elif ast.type == "if_else_statement":
         size = len(ast.children)
         if size == 2: #if number of elements in ast.children is 2
             if interpret(ast.children[0]):
-                interpret(ast.children[1])
+                return interpret(ast.children[1])
         elif size == 3:
             if interpret(ast.children[0]):
-                interpret(ast.children[1])
+                return interpret(ast.children[1])
             else:
-                interpret(ast.children[2])
-    #this while_statement is not checked yet
+                return interpret(ast.children[2])
     elif ast.type == "while_statement":
         while interpret(ast.children[0]):
-            interpret(ast.children[1])
-    #this for_statement is not checked yet
+            ret = interpret(ast.children[1])
+            if ret == "break":
+                break;
+            elif ret == "continue":
+                continue;
     elif ast.type == "for_statement":
         interpret(ast.children[0])
         while interpret(ast.children[1]):
-            interpret(ast.children[3])
+            ret = interpret(ast.children[3])
             interpret(ast.children[2])
-    #this do_while_statement is not checked yet
+            if ret == "break":
+                break;
+            elif ret == "continue":
+                continue;
     elif ast.type == "do_while_statement":
-        interpret(ast.children[0])
-        while interpret(ast.children[1]):
-            interpret(ast.children[0])
-    #this return_statement is not checked yet
+        ret = interpret(ast.children[0])
+        if ret != "break":
+            while interpret(ast.children[1]):
+                ret = interpret(ast.children[0])
+                if ret == "break":
+                    break;
+                elif ret == "continue":
+                    continue;
     elif ast.type == "return_statement":
         val = interpret(ast.children[0])
         return val
-
+    elif ast.type == "jump_statement":
+        if ast.value == "putol":
+            return "break";
+        elif ast.value == "tuloy":
+            return "continue"
 
 def i_error(msg):
     print "Interpreter error: ", msg

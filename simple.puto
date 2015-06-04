@@ -25,9 +25,10 @@ bilang_puno(){
     @bilang_i = 0;
     habang(bilang_i < bilang_sum){
         @bilang_k = 2 + bilang_i;
+        bilang_i++;
+        kung(bilang_k == 3) tuloy;
         sulat("Ang k ay: ");
         sulatln(bilang_k);
-        bilang_i++;
     }
 
    tuwing(bilang_i = 0; bilang_i < bilang_sum; bilang_i++){
@@ -41,6 +42,7 @@ bilang_puno(){
         sulat(salita_ako);
         sulatln(bilang_i + 1);
         bilang_i++;
+        kung(bilang_i == 3) putol; 
    }habang(bilang_i < bilang_sum);
 
     kung(bilang_sum > 10)
@@ -51,14 +53,17 @@ bilang_puno(){
         sulatln("Mas maliit sa 5");
     
     palit(bilang_sum){
-        kaso 5:
+        kaso 5:{
             sulatln("LIMA");
-        kaso 10:
+        }putol;
+        kaso 10:{
             sulatln("SAMPU");
+        }putol;
         walangKaso:
             sulatln("EWAN");
     }
 
     sulatln("Tapos");
+    balik 0;
 
 }

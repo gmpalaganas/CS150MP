@@ -601,6 +601,34 @@ Children:
 																																No Children
 
 
+																													AST Node "mix_list":
+																													Value: None
+																													Children:
+																														AST Node "if_else_statement":
+																														Value: kung
+																														Children:
+																															AST Node "relational_expression":
+																															Value: >
+																															Children:
+																																AST Node "variable_call":
+																																Value: None
+																																Children:
+																																	AST Node "int_identifier":
+																																	Value: bilang_i
+																																	Children:
+																																		No Children
+
+																																AST Node "int_constant":
+																																Value: 3
+																																Children:
+																																	No Children
+
+																															AST Node "jump_statement":
+																															Value: putol
+																															Children:
+																																No Children
+
+
 
 
 
@@ -721,47 +749,79 @@ Children:
 																													Value: 5
 																													Children:
 																														No Children
-																													AST Node "println_expression":
-																													Value: sulatln
-																													Children:
-																														AST Node "str_constant":
-																														Value: LIMA
-																														Children:
-																															No Children
-
-
-																												AST Node "mix_list":
-																												Value: None
-																												Children:
-																													AST Node "case_statement":
-																													Value: kaso
-																													Children:
-																														AST Node "int_constant":
-																														Value: 10
-																														Children:
-																															No Children
-																														AST Node "println_expression":
-																														Value: sulatln
-																														Children:
-																															AST Node "str_constant":
-																															Value: SAMPU
-																															Children:
-																																No Children
-
-
-																													AST Node "mix_list":
+																													AST Node "compound_statement":
 																													Value: None
 																													Children:
-																														AST Node "default_statement":
-																														Value: walangKaso
+																														AST Node "mix_list":
+																														Value: None
 																														Children:
 																															AST Node "println_expression":
 																															Value: sulatln
 																															Children:
 																																AST Node "str_constant":
-																																Value: EWAN
+																																Value: LIMA
 																																Children:
 																																	No Children
+
+
+
+
+																												AST Node "mix_list":
+																												Value: None
+																												Children:
+																													AST Node "jump_statement":
+																													Value: putol
+																													Children:
+																														No Children
+																													AST Node "mix_list":
+																													Value: None
+																													Children:
+																														AST Node "case_statement":
+																														Value: kaso
+																														Children:
+																															AST Node "int_constant":
+																															Value: 10
+																															Children:
+																																No Children
+																															AST Node "compound_statement":
+																															Value: None
+																															Children:
+																																AST Node "mix_list":
+																																Value: None
+																																Children:
+																																	AST Node "println_expression":
+																																	Value: sulatln
+																																	Children:
+																																		AST Node "str_constant":
+																																		Value: SAMPU
+																																		Children:
+																																			No Children
+
+																																	AST Node "mix_list":
+																																	Value: None
+																																	Children:
+																																		AST Node "jump_statement":
+																																		Value: putol
+																																		Children:
+																																			No Children
+
+
+
+
+																														AST Node "mix_list":
+																														Value: None
+																														Children:
+																															AST Node "default_statement":
+																															Value: walangKaso
+																															Children:
+																																AST Node "println_expression":
+																																Value: sulatln
+																																Children:
+																																	AST Node "str_constant":
+																																	Value: EWAN
+																																	Children:
+																																		No Children
+
 
 
 
@@ -779,6 +839,18 @@ Children:
 																											Value: Tapos
 																											Children:
 																												No Children
+
+																										AST Node "mix_list":
+																										Value: None
+																										Children:
+																											AST Node "return_statement":
+																											Value: balik
+																											Children:
+																												AST Node "int_constant":
+																												Value: 0
+																												Children:
+																													No Children
+
 
 
 
