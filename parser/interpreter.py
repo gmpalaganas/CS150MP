@@ -122,6 +122,7 @@ def interpret(ast):
         for child in ast.children:
             interpret(child)
         return None
+    
     elif ast.type == "println_expression":
         msg = interpret(ast.children[0])
         print(msg)
@@ -132,7 +133,7 @@ def interpret(ast):
         return None
     elif ast.type == "scan_expression":
         return raw_input();
-    
+
     elif ast.type == "variable_call":
         symbol = interpret(ast.children[0])
         return symbolTable.lookupSymbol(symbol)
@@ -149,29 +150,65 @@ def interpret(ast):
         elif ast.value == '/':
             return val1 / val2
 
+    #this unary_expression else if block is not yet checked
+    elif ast.type == "unary_expression":
+        val1 = interpret(ast.children[0])
+        if ast.value == "++":
+            return val1 + 1
+        elif ast.value == "--":
+            return val1 - 1
+        elif ast.value == "!":
+            return not val1
+
     elif ast.type == "str_constant":
         return ast.value
-
     elif ast.type == "int_constant":
         return ast.value
-
     elif ast.type == "flt_constant":
-        return ast.value
-    
+        return ast.value    
     elif ast.type == "chr_constant":
         return ast.value
 
     elif ast.type == "str_identifier":
         return ast.value
-
     elif ast.type == "int_identifier":
         return ast.value
-
     elif ast.type == "flt_identifier":
-        return ast.value
-    
+        return ast.value   
     elif ast.type == "chr_identifier":
         return ast.value
+
+    elif ast.type == "relational_expression":
+        val1 = interpret(ast.children[0])
+        val2 = interpret(ast.children[1])
+        if ast.value == "<":
+            return val1 < val2
+        elif ast.value == ">":
+            return val1 > val2
+        elif ast.value == "<=":
+            return val1 <= val2
+        elif ast.value == ">=":
+            return val1 >= val2
+    
+    elif ast.type == "logical_expression":
+        val1 = interpret(ast.children[0])
+        val2 = interpret(ast.children[1])
+        if ast.value == "||":
+            return val1 or val2
+        elif ast.value == "&&":
+            return val1 and val2
+
+    elif ast.type == "equality_expression":
+        val1 = interpret(ast.children[0])
+        val2 = interpret(ast.children[1])
+        if ast.value == "==":
+            return val1 == val2
+        elif ast.value == "!=":
+            return val1 != val2
+
+    elif ast.type = "jump_expression":
+        if ast.value == "continue":
+            
 
 
 def i_error(msg):
