@@ -19,13 +19,46 @@ bilang_puno(){
     sulat( "Input b:" );
     @bilang_y = kuha();
     sulat( "Ang sagot ay ");
-    sulatln(  bilang_x + bilang_y );
+    @bilang_sum = bilang_x + bilang_y;
+    sulatln(bilang_sum);
     
-    #Test for scoping, try calling bilan_k outside this block
-    {
-        @bilang_k = 2;
+    @bilang_i = 0;
+    habang(bilang_i < bilang_sum){
+        @bilang_k = 2 + bilang_i;
+        sulat("Ang k ay: ");
         sulatln(bilang_k);
-
+        bilang_i++;
     }
+
+   tuwing(bilang_i = 0; bilang_i < bilang_sum; bilang_i++){
+        sulat("Dito sa ika-");
+        sulatln( bilang_i + 1);
+   }
+
+   bilang_i = 0;
+   gawin{
+        @salita_ako = "Ako ay nasa ika-";
+        sulat(salita_ako);
+        sulatln(bilang_i + 1);
+        bilang_i++;
+   }habang(bilang_i < bilang_sum);
+
+    kung(bilang_sum > 10)
+        sulatln("Higit sa 10");
+    iba kung(bilang_sum > 5)
+        sulatln("Higit sa 5");
+    iba
+        sulatln("Mas maliit sa 5");
+    
+    palit(bilang_sum){
+        kaso 5:
+            sulatln("LIMA");
+        kaso 10:
+            sulatln("SAMPU");
+        walangKaso:
+            sulatln("EWAN");
+    }
+
+    sulatln("Tapos");
 
 }

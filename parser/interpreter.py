@@ -62,7 +62,7 @@ class SymbolTable:
 
         while not lookupScope.symbols.has_key(symbol):
             lookupScope = lookupScope.parent
-            if not lookupScope:
+            if lookupScope == None:
                 i_error("Variable %s does not exist within scope" % symbol)
             val = lookupScope.getSymbol(symbol)
         
@@ -70,15 +70,17 @@ class SymbolTable:
 
     def updateSymbol(self,symbol,s_type,value):
         lookupScope = self.curScope
-        val = lookupScope.getSymbol(symbol)
+        val = lookupScope.getSymbol(symbol) 
 
         while not lookupScope.symbols.has_key(symbol):
             lookupScope = lookupScope.parent
-            if not lookupScope:
+            if lookupScope == None:
                 i_error("Variable %s does not exist within scope" % symbol)
             val = lookupScope.getSymbol(symbol)
+        
 
-        if value:
+        set_val = None
+        if value != None:
             try:
                 if(s_type == STR): 
                     set_val = str(value) 
@@ -93,15 +95,15 @@ class SymbolTable:
         lookupScope.symbols[symbol] = set_val
     
     #finds number of elements in ast.children[x] node
-    def childTot(child):
-        tot = 0
-        for each in child:
-            tot = tot + 1
-        return tot
+def childTot(child):
+    tot = 0
+    for each in child:
+        tot = tot + 1
+    return tot
 
 symbolTable = SymbolTable() 
 
-def interpret(ast):
+def interpret(ast,extraParam=None):
     if ast.type == "start":
         for child in ast.children:
             interpret(child)
@@ -122,12 +124,12 @@ def interpret(ast):
     elif ast.type == "compound_statement":
         symbolTable.pushScope()
         for child in ast.children:
-            interpret(child)
+            interpret(child,extraParam)
         symbolTable.popScope()
         return None
     elif ast.type == "mix_list":
         for child in ast.children:
-            interpret(child)
+            interpret(child,extraParam)
         return None  
     elif ast.type == "println_expression":
         msg = interpret(ast.children[0])
@@ -157,11 +159,50 @@ def interpret(ast):
     elif ast.type == "unary_expression":
         val1 = interpret(ast.children[0])
         if ast.value == "++":
-            return val1 + 1
+            if ast.children[0].type == "variable_call":
+                val2 = symbolTable.lookupSymbol(val1.children[0])
+                symbolTable.updateSymbol(val1,ast.children[0].children[0].type,val2 + 1)
+                return val1
+            else:
+                return val1 + 1
         elif ast.value == "--":
+            if ast.children[0].type == "variable_call":
+                val2 = symbolTable.lookupSymbol(val1.children[0])
+                symbolTable.updateSymbol(val1,ast.children[0].children[0].type,val2 - 1)
+                return val1
             return val1 - 1
         elif ast.value == "!":
             return not val1
+        elif ast.value == "-":
+            return -val1
+    elif ast.type == "postfix_expression":
+        variable = ast.children[0].children[0].value
+        var_type = ast.children[0].children[0].type
+        val = symbolTable.lookupSymbol(variable)
+        if ast.value == "++":
+            symbolTable.updateSymbol(variable,var_type, val + 1)
+        elif ast.value == "--":
+            symbolTable.updateSymbol(variable,var_type, val - 1)
+    elif ast.type == "assignment_expression":
+        variable = ast.children[0].children[0].value
+        val = symbolTable.lookupSymbol(variable)
+        val2 = interpret(ast.children[1]);
+        op = ast.value
+        var_type = ast.children[0].children[0].type
+        if op == "=":
+            symbolTable.updateSymbol(variable, var_type, val2)
+        elif op == "+=":
+            symbolTable.updateSymbol(variable, var_type, val + val2)
+        elif op == "-=":
+            symbolTable.updateSymbol(variable, var_type, val - val2)
+        elif op == "*=":
+            symbolTable.updateSymbol(variable, var_type, val * val2)
+        elif op == "/=":
+            symbolTable.updateSymbol(variable, var_type, val / val2)
+        elif op == "%=":
+            symbolTable.updateSymbol(variable, var_type, val % val2)
+        return variable
+        
     elif ast.type == "str_constant":
         return ast.value
     elif ast.type == "int_constant":
@@ -205,74 +246,47 @@ def interpret(ast):
             return val1 != val2
     #this switch_statement block is not checked yet
     elif ast.type == "switch_statement":
-        global varSw = interpret(ast.children[0])
-        if ast.value == "palit":
-            symbolTable.pushScope()
-            interpret(ast.children[1])
-            symbolTable.popScope()
+        varSw = ast.children[0].children[0].value
+        interpret(ast.children[1],varSw)
     #this labeled_statement block is not checked yet
     elif ast.type == "case_statement":
+        varSw = extraParam
         val = interpret(ast.children[0])
-        if ast.value == "kaso":
-            if lookupSymbol(varSw) == val:  #i assumed that constant_expression is a constant and not an expression
-                symbolTable.pushScope()
-                interpret(ast.children[1])
-                symbolTable.popScope()
+        if symbolTable.lookupSymbol(varSw) == val:  #i assumed that constant_expression is a constant and not an expression
+            interpret(ast.children[1])
     #this default_statement block is not checked yet
     elif ast.type == "default_statement":
-        symbolTable.pushScope()
         interpret(ast.children[0])
-        symbolTable.popScope()
     #this if_else_statement is not checked yet
     elif ast.type == "if_else_statement":
-        if ast.value == "kung":
-            if childTot(ast.children) == 2: #if number of elements in ast.children is 2
-                if interpret(ast.children[0]):
-                    symbolTable.pushScope()
-                    interpret(ast.children[1])
-                    symbolTable.popScope()
-            elif childTot(ast.children == 3):
-                if something(ast.children[0]):
-                    symbolTable.pushScope()
-                    interpret(ast.children[1])
-                    symbolTable.popScope()
-                else:
-                    symbolTable.pushScope()
-                    interpret(ast.children[2])
-                    symbolTable.popScope()
+        size = len(ast.children)
+        if size == 2: #if number of elements in ast.children is 2
+            if interpret(ast.children[0]):
+                interpret(ast.children[1])
+        elif size == 3:
+            if interpret(ast.children[0]):
+                interpret(ast.children[1])
+            else:
+                interpret(ast.children[2])
     #this while_statement is not checked yet
     elif ast.type == "while_statement":
-        if ast.value == "habang":
-            while interpret(ast.children[0]):
-                symbolTable.pushScope()
-                interpret(ast.children[1])
-                symbolTable.popScope()
-                ast.children[0].children[0] = ast.children[0].children[0] + 1
+        while interpret(ast.children[0]):
+            interpret(ast.children[1])
     #this for_statement is not checked yet
     elif ast.type == "for_statement":
-        if ast.value == "tuwing":
-            varInit = interpret(ast.children[0])
-            while interpret(ast.children[1]):
-                symbolTable.pushScope()
-                interpret(ast.children[3])
-                symbolTable.popScope()
-                varInit = interpet(ast.children[2])
+        interpret(ast.children[0])
+        while interpret(ast.children[1]):
+            interpret(ast.children[3])
+            interpret(ast.children[2])
     #this do_while_statement is not checked yet
     elif ast.type == "do_while_statement":
-        if ast.value == "gawin":
-            symbolTable.pushScope()
+        interpret(ast.children[0])
+        while interpret(ast.children[1]):
             interpret(ast.children[0])
-            symbolTable.popScope()
-            while interpret(ast.children[1])
-                symbolTable.pushScope()
-                interpret(ast.childrem[0])
-                symbolTable.popScope()
-                ast.children[1].children[0] = ast.children[1].children[0] + 1
     #this return_statement is not checked yet
     elif ast.type == "return_statement":
-        if ast.value == "balik":
-            val = interpret(ast.children[0])
-            return val
+        val = interpret(ast.children[0])
+        return val
 
 
 def i_error(msg):

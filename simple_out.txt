@@ -14,8 +14,8 @@ Children:
 			AST Node "mix_list":
 			Value: None
 			Children:
-				AST Node "print_expression":
-				Value: sulat
+				AST Node "println_expression":
+				Value: sulatln
 				Children:
 					AST Node "binary_expression":
 					Value: +
@@ -33,8 +33,8 @@ Children:
 				AST Node "mix_list":
 				Value: None
 				Children:
-					AST Node "print_expression":
-					Value: sulat
+					AST Node "println_expression":
+					Value: sulatln
 					Children:
 						AST Node "str_constant":
 						Value: Hello World
@@ -44,8 +44,8 @@ Children:
 					AST Node "mix_list":
 					Value: None
 					Children:
-						AST Node "print_expression":
-						Value: sulat
+						AST Node "println_expression":
+						Value: sulatln
 						Children:
 							AST Node "binary_expression":
 							Value: /
@@ -71,17 +71,17 @@ Children:
 						AST Node "mix_list":
 						Value: None
 						Children:
-							AST Node "print_expression":
-							Value: sulat
+							AST Node "println_expression":
+							Value: sulatln
 							Children:
 								AST Node "binary_expression":
 								Value: /
 								Children:
-									AST Node "float_constant":
+									AST Node "flt_constant":
 									Value: 20.0
 									Children:
 										No Children
-									AST Node "float_constant":
+									AST Node "flt_constant":
 									Value: 12.5
 									Children:
 										No Children
@@ -90,10 +90,10 @@ Children:
 							AST Node "mix_list":
 							Value: None
 							Children:
-								AST Node "print_expression":
-								Value: sulat
+								AST Node "println_expression":
+								Value: sulatln
 								Children:
-									AST Node "char_constant":
+									AST Node "chr_constant":
 									Value: c
 									Children:
 										No Children
@@ -131,13 +131,33 @@ Children:
 										AST Node "mix_list":
 										Value: None
 										Children:
-											AST Node "var_declarator":
-											Value: None
+											AST Node "println_expression":
+											Value: sulatln
 											Children:
-												AST Node "int_identifier":
-												Value: bilang_x
+												AST Node "binary_expression":
+												Value: +
 												Children:
-													No Children
+													AST Node "binary_expression":
+													Value: +
+													Children:
+														AST Node "str_constant":
+														Value: Kamusta ka 
+														Children:
+															No Children
+														AST Node "variable_call":
+														Value: None
+														Children:
+															AST Node "str_identifier":
+															Value: salita_s
+															Children:
+																No Children
+
+
+													AST Node "str_constant":
+													Value: ?
+													Children:
+														No Children
+
 
 											AST Node "mix_list":
 											Value: None
@@ -145,10 +165,634 @@ Children:
 												AST Node "print_expression":
 												Value: sulat
 												Children:
-													AST Node "str_identifier":
-													Value: salita_s
+													AST Node "str_constant":
+													Value: Input a:
 													Children:
 														No Children
+
+												AST Node "mix_list":
+												Value: None
+												Children:
+													AST Node "init_declarator":
+													Value: =
+													Children:
+														AST Node "var_declarator":
+														Value: None
+														Children:
+															AST Node "int_identifier":
+															Value: bilang_x
+															Children:
+																No Children
+
+														AST Node "scan_expression":
+														Value: kuha
+														Children:
+															No Children
+
+													AST Node "mix_list":
+													Value: None
+													Children:
+														AST Node "print_expression":
+														Value: sulat
+														Children:
+															AST Node "str_constant":
+															Value: Input b:
+															Children:
+																No Children
+
+														AST Node "mix_list":
+														Value: None
+														Children:
+															AST Node "init_declarator":
+															Value: =
+															Children:
+																AST Node "var_declarator":
+																Value: None
+																Children:
+																	AST Node "int_identifier":
+																	Value: bilang_y
+																	Children:
+																		No Children
+
+																AST Node "scan_expression":
+																Value: kuha
+																Children:
+																	No Children
+
+															AST Node "mix_list":
+															Value: None
+															Children:
+																AST Node "print_expression":
+																Value: sulat
+																Children:
+																	AST Node "str_constant":
+																	Value: Ang sagot ay 
+																	Children:
+																		No Children
+
+																AST Node "mix_list":
+																Value: None
+																Children:
+																	AST Node "init_declarator":
+																	Value: =
+																	Children:
+																		AST Node "var_declarator":
+																		Value: None
+																		Children:
+																			AST Node "int_identifier":
+																			Value: bilang_sum
+																			Children:
+																				No Children
+
+																		AST Node "binary_expression":
+																		Value: +
+																		Children:
+																			AST Node "variable_call":
+																			Value: None
+																			Children:
+																				AST Node "int_identifier":
+																				Value: bilang_x
+																				Children:
+																					No Children
+
+																			AST Node "variable_call":
+																			Value: None
+																			Children:
+																				AST Node "int_identifier":
+																				Value: bilang_y
+																				Children:
+																					No Children
+
+
+
+																	AST Node "mix_list":
+																	Value: None
+																	Children:
+																		AST Node "println_expression":
+																		Value: sulatln
+																		Children:
+																			AST Node "variable_call":
+																			Value: None
+																			Children:
+																				AST Node "int_identifier":
+																				Value: bilang_sum
+																				Children:
+																					No Children
+
+
+																		AST Node "mix_list":
+																		Value: None
+																		Children:
+																			AST Node "init_declarator":
+																			Value: =
+																			Children:
+																				AST Node "var_declarator":
+																				Value: None
+																				Children:
+																					AST Node "int_identifier":
+																					Value: bilang_i
+																					Children:
+																						No Children
+
+																				AST Node "int_constant":
+																				Value: 0
+																				Children:
+																					No Children
+
+																			AST Node "mix_list":
+																			Value: None
+																			Children:
+																				AST Node "while_statement":
+																				Value: habang
+																				Children:
+																					AST Node "relational_expression":
+																					Value: <
+																					Children:
+																						AST Node "variable_call":
+																						Value: None
+																						Children:
+																							AST Node "int_identifier":
+																							Value: bilang_i
+																							Children:
+																								No Children
+
+																						AST Node "variable_call":
+																						Value: None
+																						Children:
+																							AST Node "int_identifier":
+																							Value: bilang_sum
+																							Children:
+																								No Children
+
+
+																					AST Node "compound_statement":
+																					Value: None
+																					Children:
+																						AST Node "mix_list":
+																						Value: None
+																						Children:
+																							AST Node "init_declarator":
+																							Value: =
+																							Children:
+																								AST Node "var_declarator":
+																								Value: None
+																								Children:
+																									AST Node "int_identifier":
+																									Value: bilang_k
+																									Children:
+																										No Children
+
+																								AST Node "binary_expression":
+																								Value: +
+																								Children:
+																									AST Node "int_constant":
+																									Value: 2
+																									Children:
+																										No Children
+																									AST Node "variable_call":
+																									Value: None
+																									Children:
+																										AST Node "int_identifier":
+																										Value: bilang_i
+																										Children:
+																											No Children
+
+
+
+																							AST Node "mix_list":
+																							Value: None
+																							Children:
+																								AST Node "print_expression":
+																								Value: sulat
+																								Children:
+																									AST Node "str_constant":
+																									Value: Ang k ay: 
+																									Children:
+																										No Children
+
+																								AST Node "mix_list":
+																								Value: None
+																								Children:
+																									AST Node "println_expression":
+																									Value: sulatln
+																									Children:
+																										AST Node "variable_call":
+																										Value: None
+																										Children:
+																											AST Node "int_identifier":
+																											Value: bilang_k
+																											Children:
+																												No Children
+
+
+																									AST Node "mix_list":
+																									Value: None
+																									Children:
+																										AST Node "postfix_expression":
+																										Value: ++
+																										Children:
+																											AST Node "variable_call":
+																											Value: None
+																											Children:
+																												AST Node "int_identifier":
+																												Value: bilang_i
+																												Children:
+																													No Children
+
+
+
+
+
+
+
+
+																				AST Node "mix_list":
+																				Value: None
+																				Children:
+																					AST Node "for_statement":
+																					Value: tuwing
+																					Children:
+																						AST Node "assignment_expression":
+																						Value: =
+																						Children:
+																							AST Node "variable_call":
+																							Value: None
+																							Children:
+																								AST Node "int_identifier":
+																								Value: bilang_i
+																								Children:
+																									No Children
+
+																							AST Node "int_constant":
+																							Value: 0
+																							Children:
+																								No Children
+
+																						AST Node "relational_expression":
+																						Value: <
+																						Children:
+																							AST Node "variable_call":
+																							Value: None
+																							Children:
+																								AST Node "int_identifier":
+																								Value: bilang_i
+																								Children:
+																									No Children
+
+																							AST Node "variable_call":
+																							Value: None
+																							Children:
+																								AST Node "int_identifier":
+																								Value: bilang_sum
+																								Children:
+																									No Children
+
+
+																						AST Node "postfix_expression":
+																						Value: ++
+																						Children:
+																							AST Node "variable_call":
+																							Value: None
+																							Children:
+																								AST Node "int_identifier":
+																								Value: bilang_i
+																								Children:
+																									No Children
+
+
+																						AST Node "compound_statement":
+																						Value: None
+																						Children:
+																							AST Node "mix_list":
+																							Value: None
+																							Children:
+																								AST Node "print_expression":
+																								Value: sulat
+																								Children:
+																									AST Node "str_constant":
+																									Value: Dito sa ika-
+																									Children:
+																										No Children
+
+																								AST Node "mix_list":
+																								Value: None
+																								Children:
+																									AST Node "println_expression":
+																									Value: sulatln
+																									Children:
+																										AST Node "binary_expression":
+																										Value: +
+																										Children:
+																											AST Node "variable_call":
+																											Value: None
+																											Children:
+																												AST Node "int_identifier":
+																												Value: bilang_i
+																												Children:
+																													No Children
+
+																											AST Node "int_constant":
+																											Value: 1
+																											Children:
+																												No Children
+
+
+
+
+
+
+																					AST Node "mix_list":
+																					Value: None
+																					Children:
+																						AST Node "assignment_expression":
+																						Value: =
+																						Children:
+																							AST Node "variable_call":
+																							Value: None
+																							Children:
+																								AST Node "int_identifier":
+																								Value: bilang_i
+																								Children:
+																									No Children
+
+																							AST Node "int_constant":
+																							Value: 0
+																							Children:
+																								No Children
+
+																						AST Node "mix_list":
+																						Value: None
+																						Children:
+																							AST Node "do_while_statement":
+																							Value: gawin
+																							Children:
+																								AST Node "compound_statement":
+																								Value: None
+																								Children:
+																									AST Node "mix_list":
+																									Value: None
+																									Children:
+																										AST Node "init_declarator":
+																										Value: =
+																										Children:
+																											AST Node "var_declarator":
+																											Value: None
+																											Children:
+																												AST Node "str_identifier":
+																												Value: salita_ako
+																												Children:
+																													No Children
+
+																											AST Node "str_constant":
+																											Value: Ako ay nasa ika-
+																											Children:
+																												No Children
+
+																										AST Node "mix_list":
+																										Value: None
+																										Children:
+																											AST Node "print_expression":
+																											Value: sulat
+																											Children:
+																												AST Node "variable_call":
+																												Value: None
+																												Children:
+																													AST Node "str_identifier":
+																													Value: salita_ako
+																													Children:
+																														No Children
+
+
+																											AST Node "mix_list":
+																											Value: None
+																											Children:
+																												AST Node "println_expression":
+																												Value: sulatln
+																												Children:
+																													AST Node "binary_expression":
+																													Value: +
+																													Children:
+																														AST Node "variable_call":
+																														Value: None
+																														Children:
+																															AST Node "int_identifier":
+																															Value: bilang_i
+																															Children:
+																																No Children
+
+																														AST Node "int_constant":
+																														Value: 1
+																														Children:
+																															No Children
+
+
+																												AST Node "mix_list":
+																												Value: None
+																												Children:
+																													AST Node "postfix_expression":
+																													Value: ++
+																													Children:
+																														AST Node "variable_call":
+																														Value: None
+																														Children:
+																															AST Node "int_identifier":
+																															Value: bilang_i
+																															Children:
+																																No Children
+
+
+
+
+
+
+
+																								AST Node "relational_expression":
+																								Value: <
+																								Children:
+																									AST Node "variable_call":
+																									Value: None
+																									Children:
+																										AST Node "int_identifier":
+																										Value: bilang_i
+																										Children:
+																											No Children
+
+																									AST Node "variable_call":
+																									Value: None
+																									Children:
+																										AST Node "int_identifier":
+																										Value: bilang_sum
+																										Children:
+																											No Children
+
+
+
+																							AST Node "mix_list":
+																							Value: None
+																							Children:
+																								AST Node "if_else_statement":
+																								Value: kung
+																								Children:
+																									AST Node "relational_expression":
+																									Value: >
+																									Children:
+																										AST Node "variable_call":
+																										Value: None
+																										Children:
+																											AST Node "int_identifier":
+																											Value: bilang_sum
+																											Children:
+																												No Children
+
+																										AST Node "int_constant":
+																										Value: 10
+																										Children:
+																											No Children
+
+																									AST Node "println_expression":
+																									Value: sulatln
+																									Children:
+																										AST Node "str_constant":
+																										Value: Higit sa 10
+																										Children:
+																											No Children
+
+																									AST Node "if_else_statement":
+																									Value: kung
+																									Children:
+																										AST Node "relational_expression":
+																										Value: >
+																										Children:
+																											AST Node "variable_call":
+																											Value: None
+																											Children:
+																												AST Node "int_identifier":
+																												Value: bilang_sum
+																												Children:
+																													No Children
+
+																											AST Node "int_constant":
+																											Value: 5
+																											Children:
+																												No Children
+
+																										AST Node "println_expression":
+																										Value: sulatln
+																										Children:
+																											AST Node "str_constant":
+																											Value: Higit sa 5
+																											Children:
+																												No Children
+
+																										AST Node "println_expression":
+																										Value: sulatln
+																										Children:
+																											AST Node "str_constant":
+																											Value: Mas maliit sa 5
+																											Children:
+																												No Children
+
+
+
+																								AST Node "mix_list":
+																								Value: None
+																								Children:
+																									AST Node "switch_statement":
+																									Value: palit
+																									Children:
+																										AST Node "variable_call":
+																										Value: None
+																										Children:
+																											AST Node "int_identifier":
+																											Value: bilang_sum
+																											Children:
+																												No Children
+
+																										AST Node "compound_statement":
+																										Value: None
+																										Children:
+																											AST Node "mix_list":
+																											Value: None
+																											Children:
+																												AST Node "case_statement":
+																												Value: kaso
+																												Children:
+																													AST Node "int_constant":
+																													Value: 5
+																													Children:
+																														No Children
+																													AST Node "println_expression":
+																													Value: sulatln
+																													Children:
+																														AST Node "str_constant":
+																														Value: LIMA
+																														Children:
+																															No Children
+
+
+																												AST Node "mix_list":
+																												Value: None
+																												Children:
+																													AST Node "case_statement":
+																													Value: kaso
+																													Children:
+																														AST Node "int_constant":
+																														Value: 10
+																														Children:
+																															No Children
+																														AST Node "println_expression":
+																														Value: sulatln
+																														Children:
+																															AST Node "str_constant":
+																															Value: SAMPU
+																															Children:
+																																No Children
+
+
+																													AST Node "mix_list":
+																													Value: None
+																													Children:
+																														AST Node "default_statement":
+																														Value: walangKaso
+																														Children:
+																															AST Node "println_expression":
+																															Value: sulatln
+																															Children:
+																																AST Node "str_constant":
+																																Value: EWAN
+																																Children:
+																																	No Children
+
+
+
+
+
+
+
+																									AST Node "mix_list":
+																									Value: None
+																									Children:
+																										AST Node "println_expression":
+																										Value: sulatln
+																										Children:
+																											AST Node "str_constant":
+																											Value: Tapos
+																											Children:
+																												No Children
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
