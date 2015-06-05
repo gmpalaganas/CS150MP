@@ -1,6 +1,6 @@
-from parser.lexer import runLexer
-from parser.interpreter import interpret
-from parser.parser import runParser
+from puto.lexer import runLexer
+from puto.interpreter import interpret
+from puto.parser import runParser
 import sys
 
 def main():
