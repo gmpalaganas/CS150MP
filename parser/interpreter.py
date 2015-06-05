@@ -18,7 +18,7 @@ class SymbolTableScope:
             return None
 
 class SymbolTable:
-    defaults = { STR : ' ', INT : 0, FLT : 0.0, CHR : '\0' }
+    defaults = { STR : '', INT : 0, FLT : 0.0, CHR : '\0' }
     types = { STR: 'string', INT : 'int', FLT : 'float', CHR : 'char' }
 
     def __init__(self):
