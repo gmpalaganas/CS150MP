@@ -17,7 +17,7 @@ output:
 
 bilang_puno(){
 
-    sulat("I-input ang hangad na taas ng trayangolo: ");
+    sulat("I-input ang hangad na taas ng tatsulok: ");
 	@bilang_a = kuha();
 	@bilang_b = 1;
 	

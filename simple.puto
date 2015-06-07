@@ -79,6 +79,9 @@ bilang_puno(){
     sulat("2^10 = ");
     sulatln(bilang_pow(2,10));
 
+    sulat("Wala lang: ");
+    sulatln(bilang_walaLang(5,3));
+
     sulatln("Tapos");
     balik 0;
 
@@ -105,4 +108,13 @@ bilang_puno(){
         bilang_ret = bilang_a * bilang_pow(bilang_a, bilang_b - 1);
 
     balik bilang_ret;
+}
+
+@bilang_walaLang(bilang_a,bilang_b){
+    
+    @bilang_fact = bilang_factorial(bilang_b);
+    @bilang_ret = bilang_pow(bilang_a,bilang_fact);
+
+    balik bilang_ret;
+
 }
