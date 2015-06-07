@@ -3,7 +3,7 @@
 # A program that ask the user to input a range of years and outputs the list of leap years in that range.
 
 bilang_puno(){
-	sulat("These program computes for the leap year within the specified range of the user \n");
+	sulatln("These program computes for the leap year within the specified range of the user");
 	
 	sulat("Enter the first year range: ");
 	@bilang_range1 = kuha();
@@ -11,13 +11,14 @@ bilang_puno(){
 	sulat("Enter the first second range: ");
 	@bilang_range2 = kuha();
 	
-	sulat("The leap year/s within the specified range is/are: \n");
+	sulatln("The leap year/s within the specified range is/are:");
     
     @bilang_i;
 	tuwing( bilang_i = bilang_range1 ; bilang_i <= bilang_range2 ; bilang_i = bilang_i + 1 ){
-		kung (bilang_i % 4 == 0 && bilang_i % 100!= 0 || bilang_i % 400 == 0){
-			sulat(bilang_i);
-			sulat( "\n" );
+		kung (bilang_i % 4 == 0 && bilang_i % 100 != 0 || bilang_i % 400 == 0){
+			sulatln(bilang_i);
 		}
 	}
+
+    balik 0;
 }

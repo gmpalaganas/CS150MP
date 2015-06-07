@@ -164,23 +164,23 @@ def p_fxn_prot(p):
 
 def p_fxn_definition(p):
     'fxn_definition : fxn_declaration compound_statement'
-    p[0] = ASTNode("fxn_declaration", [ p[1], p[2] ])
+    p[0] = ASTNode("function_definition", [ p[1], p[2] ])
 
 def p_fxn_declaration_1(p):
     'fxn_declaration : VAR identifier LPAREN fxn_prot_args RPAREN'
-    p[0] = ASTNode("fxn_declaration", [ p[2], p[4] ], p[1])
+    p[0] = ASTNode("function_declaration", [ p[2], p[4] ], p[1])
 
 def p_fxn_declaration_2(p):
     'fxn_declaration : VAR identifier LPAREN empty RPAREN'
-    p[0] = ASTNode("fxn_declaration", [ p[2] ], p[1])
+    p[0] = ASTNode("function_declaration", [ p[2] ], p[1])
 
 def p_fxn_prot_args_1(p):
     'fxn_prot_args : identifier COMMA fxn_prot_args'
-    p[0] = ASTNode("fxn_args", [ p[1], p[3] ], p[2]) 
+    p[0] = ASTNode("function_args", [ p[1], p[3] ])
 
 def p_fxn_prot_args_2(p):
     'fxn_prot_args : identifier'
-    p[0] = ASTNode("fxn_args", [ p[1] ])
+    p[0] = ASTNode("function_args", [ p[1] ])
 
 #statement
 def p_statement(p):
@@ -250,10 +250,6 @@ def p_selection_statement_1(p):
 def p_selection_statement_2(p):
     'selection_statement : IF LPAREN expression RPAREN statement ELSE statement '
     p[0] = ASTNode("if_else_statement", [ p[3], p[5], p[7] ], p[1])
-
-def p_else_if_statement_2(p):
-    'else_if_statement : empty'
-    p[0] = ASTNode("empty")
 
 def p_selection_statement_3(p):
     'selection_statement : SWITCH LPAREN expression RPAREN statement '
@@ -464,8 +460,7 @@ def p_primary_expression_3(p):
 
 def p_argument_expression_list_1(p):
     'argument_expression_list : assignment_expression'
-    p[0] = p[1]
-    pass
+    p[0] = ASTNode("argument_expression_list", [ p[1] ])
 
 def p_argument_expression_list_2(p):
     'argument_expression_list : argument_expression_list COMMA assignment_expression'
@@ -486,6 +481,11 @@ def p_identifier_3(p):
 def p_identifier_4(p):
     'identifier : STR_ID'
     p[0] = ASTNode("str_identifier", value =  p[1] )
+
+def p_identifier_5(p):
+    'identifier : VOID_ID'
+    p[0] = ASTNode("vod_identifier", value =  p[1] )
+
 
 def p_constant(p):
     'constant : FLOAT_LIT'
@@ -508,8 +508,14 @@ def p_empty(p):
     pass
 
 def p_error(p):
-    print "Syntax Error at line ", p.lineno, " on ", p.value
+    if p:
+        print "Syntax Error at line ", p.lineno, " on ", p.value
+    else:
+        print "Syntax Error at EOF"
     exit(1)
+
+lex = lexer.lexer
+parser = yacc.yacc()
 
 def parseString(data):
 
@@ -521,8 +527,6 @@ def parseString(data):
             )
 
     log = logging.getLogger()
-    lex = lexer.lexer
-    parser = yacc.yacc(debug=True, debuglog=log)
     return parser.parse(data)
 
 def runParser(file_name):

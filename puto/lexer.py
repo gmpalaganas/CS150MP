@@ -54,6 +54,7 @@ tokens = [
 	'INT_ID',
 	'CHAR_ID',
 	'STR_ID',
+    'VOID_ID',
 	#literals
 	'FLOAT_LIT',
 	'INT_LIT',
@@ -151,6 +152,9 @@ def t_STR_ID(t):
 	t.value = str(t.value)    
 	return t
 
+def t_VOID_ID(t):      
+    r'wala_[a-zA-Z][a-zA-Z0-9]*'
+    return t
 def t_ID(t):
     r'[a-zA-Z_][a-zA-Z_0-9]*'
     t.type = reserved.get(t.value,'ID')    # Check for reserved words

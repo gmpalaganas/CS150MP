@@ -5,15 +5,23 @@ STR = "str_identifier"
 INT = "int_identifier"
 FLT = "flt_identifier"
 CHR = "chr_identifier"
+VOD = "vod_identifier"
 
 class SymbolTableScope:
     def __init__(self,parent=None):
         self.parent = parent
         self.symbols = {}
+        self.functions = {}
 
     def getSymbol(self,symbol):
         if self.symbols.has_key(symbol):
             return self.symbols[symbol]
+        else:
+            return None
+
+    def getFunction(self,identifier):
+        if self.functions.has_key(identifier):
+            return self.functions[identifier]
         else:
             return None
 
@@ -50,7 +58,7 @@ class SymbolTable:
                     set_val = int(value)
                 elif(s_type == FLT):
                     set_val = float(value)
-            except ValueError:
+            except TypeError:
                i_error("%s expects %s but '%s' is of type %s " % (symbol, self.types[s_type], str(value), type(value)))
 
         scope.symbols[symbol] = set_val
@@ -91,25 +99,127 @@ class SymbolTable:
                     set_val = float(value)
             except ValueError:
                i_error("%s expects %s but '%s' is of type %s " % (symbol, self.types[s_type], str(value), type(value)))
+            except TypeError:
+               i_error("%s expects %s but '%s' is of type %s " % (symbol, self.types[s_type], str(value), type(value)))
         lookupScope.symbols[symbol] = set_val
 
-    #finds number of elements in ast.children[x] node
-def childTot(child):
-    tot = 0
-    for each in child:
-        tot = tot + 1
-    return tot
+    def declareFunction(self,identifier,function):
+        scope = self.curScope
+
+        if scope.functions.has_key(identifier):
+           i_error("Function name %s already exists" % identifier)
+        scope.functions[identifier] = function
+
+    def lookupFunction(self,identifier):
+        lookupScope = self.curScope
+        val = lookupScope.getFunction(identifier)
+
+        while not lookupScope.functions.has_key(identifier):
+            lookupScope = lookupScope.parent
+            if lookupScope == None:
+                i_error("Function %s does not exist within scope" % identifier)
+            val = lookupScope.getFunction(identifier)
+
+        return val
 
 symbolTable = SymbolTable()
 
+#Function structure
+class Function:
+    
+    '''
+    identifier - name of the function
+               - also defines the return type
+    params     - ast node of type function_args
+               - contains the parameters of the function
+    ast        - ast of the body of the function
+    '''
+    def __init__(self,identifier,type,body,params=None):
+        self.identifier = identifier
+        self.type = type
+        if params == None:
+            self.params = []
+        else:
+            self.params = params
+        self.body = body
+
+    def call(self,params=None):
+        symbolTable.pushScope() 
+        if params == None:
+            params = []
+        
+        len_params = len(params)
+        len_expected = len(self.params)
+
+        if len(params) != len(self.params):
+            msg = "Expected %d parameters but got %d parameters" % (len_expected,len_params)
+            i_error(msg)
+
+        for i in range(0,len_expected):
+            symbolTable.declareSymbol(self.params[i].value,self.params[i].type,params[i])
+        
+        ret = interpret(self.body)
+        symbolTable.popScope()
+        self.checkReturnValue(ret)
+        
+        return ret
+
+    def checkReturnValue(self,ret_val):
+        ret = True
+        if self.type == VOD and ret_val != None:
+            ret = False
+        elif self.type == INT:
+            try:
+                ret_val = int(ret_val)
+            except ValueError:
+                i_error("Invalid return value for function %s" % self.identifier)
+            except TyieError:
+                i_error("Invalid return value for function %s" % self.identifier)
+        elif self.type == FLT:
+           try:
+               ret_val = float(ret_val)
+           except ValueError:
+               i_error("Invalid return value for function" % self.identifier)
+           except TypeError:
+                i_error("Invalid return value for function" % self.identifier)
+        elif self.type == STR:
+           try:
+               ret_val = str(ret_val)
+           except ValueError:
+               i_error("Invalid return value for function" % self.identifier)
+           except TypeError:
+                i_error("Invalid return value for function" % self.identifier)
+        elif self.type == CHR:
+           try:
+               ret_val = str(ret_val)
+               if len(ret_val) > 1:
+                   i_error("Invalid return value for function" % self.identifier)
+           except ValueError:
+               i_error("Invalid return value for function" % self.identifier)
+           except TypeError:
+                i_error("Invalid return value for function" % self.identifier)
+#Interpreter
 def interpret(ast,extraParam=None):
     if ast.type == "start":
-        for child in ast.children:
-            interpret(child)
-        return None
-    elif ast.type == "main":
+        #outside main 
         interpret(ast.children[0])
-        return None
+        interpret(ast.children[2])
+        #main
+        ret = interpret(ast.children[1])
+        return ret
+    elif ast.type == "main":
+        ret = interpret(ast.children[0])
+        try:
+            ret = int(ret)
+        except TypeError:
+            i_error("Invalid Main return value")
+        except ValueError:
+            i_error("Invalid Main return value")
+        return ret
+    elif ast.type == "external_declaration":
+        for child in ast.children:
+            ret = interpret(child,extraParam)
+         
     elif ast.type == "init_declarator":
         symbol = interpret(ast.children[0])
         value = interpret(ast.children[1])
@@ -124,14 +234,18 @@ def interpret(ast,extraParam=None):
             ret = interpret(child,extraParam)
             if ret == "break" or ret == "continue":
                 return ret
+            if child.type == "return_statement":
+                return ret
         symbolTable.popScope()
-        return None
+        return ret 
     elif ast.type == "mix_list":
         for child in ast.children:
             ret = interpret(child,extraParam)
             if ret == "break" or ret == "continue":
                 return ret
-        return None
+            if child.type == "return_statement":
+                return ret
+        return ret 
     elif ast.type == "println_expression":
         msg = interpret(ast.children[0])
         print(msg)
@@ -156,6 +270,8 @@ def interpret(ast,extraParam=None):
             return val1 * val2
         elif ast.value == '/':
             return val1 / val2
+        elif ast.value == '%':
+            return val1 % val2
     #this unary_expression else if block is not yet checked
     elif ast.type == "unary_expression":
         val1 = interpret(ast.children[0])
@@ -297,6 +413,45 @@ def interpret(ast,extraParam=None):
             return "break";
         elif ast.value == "tuloy":
             return "continue"
+    elif ast.type == "function_definition":
+        declaration = ast.children[0]
+        identifier = interpret(declaration.children[0])
+        try:
+            params = interpret(declaration.children[1])
+        except IndexError:
+            params = []
+        body = ast.children[1]
+        function = Function(identifier,declaration.children[0].type,body,params)
+        symbolTable.declareFunction(identifier,function)
+    elif ast.type == "function_args":
+        if extraParam == None:
+            params = []
+        else:
+            params = extraParam
+        for arg in ast.children:
+            if arg.type != "function_args":
+                params.append(arg)
+            else:
+                params = interpret(arg,params)
+
+        return params
+    elif ast.type == "argument_expression_list":
+        params = []
+        for arg in ast.children:
+            if arg.type != "argument_expression_list":
+                params.append(interpret(arg))
+            else:
+                params = interpret(arg,params)
+        return params
+    elif ast.type == "function_call":
+        identifier = interpret(ast.children[0].children[0])
+        function = symbolTable.lookupFunction(identifier)
+        try:
+            params = interpret(ast.children[1])
+        except IndexError:
+            params = []
+        return function.call(params)
+        
 
 def i_error(msg):
     print "Interpreter error: ", msg

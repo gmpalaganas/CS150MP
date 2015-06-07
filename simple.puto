@@ -3,13 +3,21 @@
     AJSKLAJSLALSKLAJSLAKJSLA
 ~
 
+@bilang_add(bilang_a,bilang_b){
+    balik bilang_a + bilang_b;
+}
+
+@wala_println(){
+    sulatln("HELLO MUNDO!");
+    sulatln("PROGRAM START");
+}
+
 bilang_puno(){
-    sulatln(5 + 3);
-    sulatln("Hello World");
-    sulatln( (5 + 3) / 2);
-    sulatln( 20.0 / 12.5 );
-    sulatln( 'c' );
     
+    wala_println();
+
+    @bilang_asda,@bilang_asdsa;
+
     sulat( "Anong pangalan mo?" );
     @salita_s = kuha();
     sulatln( "Kamusta ka " + salita_s + "?");
@@ -19,7 +27,7 @@ bilang_puno(){
     sulat( "Input b:" );
     @bilang_y = kuha();
     sulat( "Ang sagot ay ");
-    @bilang_sum = bilang_x + bilang_y;
+    @bilang_sum = bilang_add(bilang_x,bilang_y);
     sulatln(bilang_sum);
     
     @bilang_i = 0;
@@ -65,7 +73,36 @@ bilang_puno(){
             sulatln("EWAN");
     }
 
+    sulat("5! = ");
+    sulatln(bilang_factorial(5));
+
+    sulat("2^10 = ");
+    sulatln(bilang_pow(2,10));
+
     sulatln("Tapos");
     balik 0;
 
+}
+
+@bilang_factorial(bilang_n){
+    
+    @bilang_ret = 1;
+
+    kung(bilang_n != 0){
+        bilang_ret = bilang_n * bilang_factorial(bilang_n - 1);
+    }
+
+    balik bilang_ret;
+
+}
+
+@bilang_pow(bilang_a,bilang_b){
+    
+    
+    @bilang_ret = 1;
+
+    kung(bilang_b != 0)
+        bilang_ret = bilang_a * bilang_pow(bilang_a, bilang_b - 1);
+
+    balik bilang_ret;
 }

@@ -15,20 +15,23 @@ output:
 *****
 ~
 
-bilang_puno(){	
+bilang_puno(){
+
+    sulat("I-input ang hangad na taas ng trayangolo: ");
 	@bilang_a = kuha();
-	
 	@bilang_b = 1;
 	
 	habang (bilang_b <= bilang_a){
-		bilang_c = 1 ;
+		@bilang_c = 1 ;
 		
 		habang (bilang_c <= bilang_b){
 			sulat ( "*" ) ;
 			bilang_c = bilang_c + 1 ; 
 		}
 		
-		sulat ( "\n" ) ;
+        sulatln("");
 		bilang_b = bilang_b + 1 ;
 	}
+
+    balik 0;
 }
