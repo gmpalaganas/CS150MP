@@ -76,8 +76,10 @@ bilang_puno(){
     sulat("5! = ");
     sulatln(bilang_factorial(5));
 
+    @bilang_dalawa = 2;
+
     sulat("2^10 = ");
-    sulatln(bilang_pow(2,10));
+    sulatln(bilang_pow(bilang_dalawa,10));
 
     sulat("Wala lang: ");
     sulatln(bilang_walaLang(5,3));

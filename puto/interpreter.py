@@ -441,7 +441,7 @@ def interpret(ast,extraParam=None):
             if arg.type != "argument_expression_list":
                 params.append(interpret(arg))
             else:
-                params = interpret(arg,params)
+                params = interpret(arg)
         return params
     elif ast.type == "function_call":
         identifier = interpret(ast.children[0].children[0])
