@@ -132,7 +132,8 @@ class Function:
                - also defines the return type
     params     - ast node of type function_args
                - contains the parameters of the function
-    ast        - ast of the body of the function
+    type       - the return type of the function
+    body       - ast of the body of the function
     '''
     def __init__(self,identifier,type,body,params=None):
         self.identifier = identifier
@@ -143,7 +144,7 @@ class Function:
             self.params = params
         self.body = body
 
-    def call(self,params=None):
+    def __call__(self,params=None):
         symbolTable.pushScope() 
         if params == None:
             params = []
@@ -433,7 +434,6 @@ def interpret(ast,extraParam=None):
                 params.append(arg)
             else:
                 params = interpret(arg,params)
-
         return params
     elif ast.type == "argument_expression_list":
         params = []
@@ -450,7 +450,7 @@ def interpret(ast,extraParam=None):
             params = interpret(ast.children[1])
         except IndexError:
             params = []
-        return function.call(params)
+        return function(params)
         
 
 def i_error(msg):
